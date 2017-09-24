@@ -8,6 +8,8 @@ import com.ivianuu.rxsystemsettings.RxSystemSettings;
 import com.ivianuu.rxsystemsettings.SettingsType;
 import com.ivianuu.rxsystemsettings.SystemSetting;
 
+import io.reactivex.functions.Consumer;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         RxSystemSettings systemSettings = RxSystemSettings.create(this);
 
-        SystemSetting<Integer> ambientDisplay = systemSettings.getInt("mobile_data", SettingsType.SECURE);
+        SystemSetting<Integer> ambientDisplay = systemSettings.getInteger("doze_enabled", SettingsType.SECURE);
 
         ambientDisplay.observe()
                 .subscribe(integer -> {

@@ -27,9 +27,9 @@ import com.ivianuu.rxsystemsettings.SettingsType;
  * Reads and writes integer values
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public final class IntAdapter implements Adapter<Integer> {
+public final class IntegerAdapter implements Adapter<Integer> {
 
-    public static final Adapter<Integer> INSTANCE = new IntAdapter();
+    public static final Adapter<Integer> INSTANCE = new IntegerAdapter();
 
     @NonNull
     @Override

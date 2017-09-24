@@ -18,11 +18,10 @@ package com.ivianuu.rxsystemsettings;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 
 import com.ivianuu.rxsystemsettings.adapter.FloatAdapter;
-import com.ivianuu.rxsystemsettings.adapter.IntAdapter;
+import com.ivianuu.rxsystemsettings.adapter.IntegerAdapter;
 import com.ivianuu.rxsystemsettings.adapter.LongAdapter;
 import com.ivianuu.rxsystemsettings.adapter.StringAdapter;
 
@@ -72,21 +71,21 @@ public final class RxSystemSettings {
     }
 
     /**
-     * Returns a new int system setting
+     * Returns a new integer system setting
      */
     @NonNull
-    public SystemSetting<Integer> getInt(@NonNull String name, @SettingsType int type) {
-        return getInt(name, DEFAULT_INTEGER, type);
+    public SystemSetting<Integer> getInteger(@NonNull String name, @SettingsType int type) {
+        return getInteger(name, DEFAULT_INTEGER, type);
     }
 
     /**
-     * Returns a new int system setting
+     * Returns a new integer system setting
      */
     @NonNull
-    public SystemSetting<Integer> getInt(@NonNull String name, @NonNull Integer defaultValue,
-                                         @SettingsType int type) {
+    public SystemSetting<Integer> getInteger(@NonNull String name, @NonNull Integer defaultValue,
+                                             @SettingsType int type) {
         return new RealSystemSetting<>(
-                contentResolver, name, defaultValue, IntAdapter.INSTANCE, contentObserverFactory, type);
+                contentResolver, name, defaultValue, IntegerAdapter.INSTANCE, contentObserverFactory, type);
     }
 
     /**
