@@ -34,15 +34,16 @@ public final class IntAdapter implements Adapter<Integer> {
     @NonNull
     @Override
     public Integer get(@NonNull String name,
+                       @NonNull Integer defaultValue,
                        @NonNull ContentResolver contentResolver,
-                       @SettingsType int type) throws Settings.SettingNotFoundException {
+                       @SettingsType int type) {
         switch (type) {
             case SettingsType.GLOBAL:
-                return Settings.Global.getInt(contentResolver, name);
+                return Settings.Global.getInt(contentResolver, name, defaultValue);
             case SettingsType.SECURE:
-                return Settings.Secure.getInt(contentResolver, name);
+                return Settings.Secure.getInt(contentResolver, name, defaultValue);
             case SettingsType.SYSTEM:
-                return Settings.System.getInt(contentResolver, name);
+                return Settings.System.getInt(contentResolver, name, defaultValue);
             default:
                 throw new IllegalArgumentException("unknown type " + type);
         }

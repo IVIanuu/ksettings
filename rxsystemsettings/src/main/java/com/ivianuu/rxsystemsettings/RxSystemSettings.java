@@ -29,6 +29,10 @@ import com.ivianuu.rxsystemsettings.adapter.StringAdapter;
  * Rx system settings
  */
 public final class RxSystemSettings {
+    private static final Float DEFAULT_FLOAT = 0f;
+    private static final Integer DEFAULT_INTEGER = 0;
+    private static final Long DEFAULT_LONG = 0L;
+    private static final String DEFAULT_STRING = "";
 
     private final ContentResolver contentResolver;
     private final ContentObserverFactory contentObserverFactory;
@@ -53,8 +57,17 @@ public final class RxSystemSettings {
      */
     @NonNull
     public SystemSetting<Float> getFloat(@NonNull String name, @SettingsType int type) {
+        return getFloat(name, DEFAULT_FLOAT, type);
+    }
+
+    /**
+     * Returns a new float system setting
+     */
+    @NonNull
+    public SystemSetting<Float> getFloat(@NonNull String name, @NonNull Float defaultValue,
+                                         @SettingsType int type) {
         return new RealSystemSetting<>(
-                contentResolver, name, FloatAdapter.INSTANCE, contentObserverFactory, type);
+                contentResolver, name, defaultValue, FloatAdapter.INSTANCE, contentObserverFactory, type);
     }
 
     /**
@@ -62,8 +75,17 @@ public final class RxSystemSettings {
      */
     @NonNull
     public SystemSetting<Integer> getInt(@NonNull String name, @SettingsType int type) {
+        return getInt(name, DEFAULT_INTEGER, type);
+    }
+
+    /**
+     * Returns a new int system setting
+     */
+    @NonNull
+    public SystemSetting<Integer> getInt(@NonNull String name, @NonNull Integer defaultValue,
+                                         @SettingsType int type) {
         return new RealSystemSetting<>(
-                contentResolver, name, IntAdapter.INSTANCE, contentObserverFactory, type);
+                contentResolver, name, defaultValue, IntAdapter.INSTANCE, contentObserverFactory, type);
     }
 
     /**
@@ -71,8 +93,17 @@ public final class RxSystemSettings {
      */
     @NonNull
     public SystemSetting<Long> getLong(@NonNull String name, @SettingsType int type) {
+        return getLong(name, DEFAULT_LONG, type);
+    }
+
+    /**
+     * Returns a new long system setting
+     */
+    @NonNull
+    public SystemSetting<Long> getLong(@NonNull String name, @NonNull Long defaultValue,
+                                       @SettingsType int type) {
         return new RealSystemSetting<>(
-                contentResolver, name, LongAdapter.INSTANCE, contentObserverFactory, type);
+                contentResolver, name, defaultValue, LongAdapter.INSTANCE, contentObserverFactory, type);
     }
 
     /**
@@ -80,7 +111,16 @@ public final class RxSystemSettings {
      */
     @NonNull
     public SystemSetting<String> getString(@NonNull String name, @SettingsType int type) {
+        return getString(name, DEFAULT_STRING, type);
+    }
+
+    /**
+     * Returns a new string system setting
+     */
+    @NonNull
+    public SystemSetting<String> getString(@NonNull String name, @NonNull String defaultValue,
+                                           @SettingsType int type) {
         return new RealSystemSetting<>(
-                contentResolver, name, StringAdapter.INSTANCE, contentObserverFactory, type);
+                contentResolver, name, defaultValue, StringAdapter.INSTANCE, contentObserverFactory, type);
     }
 }

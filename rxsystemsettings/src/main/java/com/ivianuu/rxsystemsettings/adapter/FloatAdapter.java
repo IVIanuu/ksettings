@@ -34,15 +34,16 @@ public final class FloatAdapter implements Adapter<Float> {
     @NonNull
     @Override
     public Float get(@NonNull String name,
-                       @NonNull ContentResolver contentResolver,
-                       @SettingsType int type) throws Settings.SettingNotFoundException {
+                     @NonNull Float defaultValue,
+                     @NonNull ContentResolver contentResolver,
+                     @SettingsType int type) {
         switch (type) {
             case SettingsType.GLOBAL:
-                return Settings.Global.getFloat(contentResolver, name);
+                return Settings.Global.getFloat(contentResolver, name, defaultValue);
             case SettingsType.SECURE:
-                return Settings.Secure.getFloat(contentResolver, name);
+                return Settings.Secure.getFloat(contentResolver, name, defaultValue);
             case SettingsType.SYSTEM:
-                return Settings.System.getFloat(contentResolver, name);
+                return Settings.System.getFloat(contentResolver, name, defaultValue);
             default:
                 throw new IllegalArgumentException("unknown type " + type);
         }

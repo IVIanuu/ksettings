@@ -16,13 +16,14 @@
 
 package com.ivianuu.rxsystemsettings;
 
+import android.Manifest;
 import android.net.Uri;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-
-import java.util.function.Consumer;
+import android.support.annotation.RequiresPermission;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * System setting
@@ -47,6 +48,7 @@ public interface SystemSetting<T> {
     /**
      * Sets the current value of this system setting
      */
+    @RequiresPermission(anyOf = {Manifest.permission.WRITE_SETTINGS, Manifest.permission.WRITE_SECURE_SETTINGS}, conditional = true)
     void set(@NonNull T value);
 
     /**

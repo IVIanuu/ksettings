@@ -34,8 +34,9 @@ public final class StringAdapter implements Adapter<String> {
     @NonNull
     @Override
     public String get(@NonNull String name,
-                    @NonNull ContentResolver contentResolver,
-                    @SettingsType int type) throws Settings.SettingNotFoundException {
+                      @NonNull String defaultValue,
+                      @NonNull ContentResolver contentResolver,
+                      @SettingsType int type) {
         switch (type) {
             case SettingsType.GLOBAL:
                 return Settings.Global.getString(contentResolver, name);

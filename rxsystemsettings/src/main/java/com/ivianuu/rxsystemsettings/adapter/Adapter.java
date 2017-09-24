@@ -32,8 +32,9 @@ public interface Adapter<T> {
      */
     @NonNull
     T get(@NonNull String name,
+          @NonNull T defaultValue,
           @NonNull ContentResolver contentResolver,
-          @SettingsType int type) throws Settings.SettingNotFoundException;
+          @SettingsType int type);
 
     /**
      * Sets the value of this name
@@ -41,5 +42,5 @@ public interface Adapter<T> {
     void set(@NonNull String name,
              @NonNull T value,
              @NonNull ContentResolver contentResolver,
-             @SettingsType int type) throws Settings.SettingNotFoundException;
+             @SettingsType int type);
 }

@@ -34,15 +34,16 @@ public final class LongAdapter implements Adapter<Long> {
     @NonNull
     @Override
     public Long get(@NonNull String name,
-                     @NonNull ContentResolver contentResolver,
-                     @SettingsType int type) throws Settings.SettingNotFoundException {
+                    @NonNull Long defaultValue,
+                    @NonNull ContentResolver contentResolver,
+                    @SettingsType int type) {
         switch (type) {
             case SettingsType.GLOBAL:
-                return Settings.Global.getLong(contentResolver, name);
+                return Settings.Global.getLong(contentResolver, name, defaultValue);
             case SettingsType.SECURE:
-                return Settings.Secure.getLong(contentResolver, name);
+                return Settings.Secure.getLong(contentResolver, name, defaultValue);
             case SettingsType.SYSTEM:
-                return Settings.System.getLong(contentResolver, name);
+                return Settings.System.getLong(contentResolver, name, defaultValue);
             default:
                 throw new IllegalArgumentException("unknown type " + type);
         }

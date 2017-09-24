@@ -34,17 +34,20 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
 
     private final ContentResolver contentResolver;
     private final String name;
+    private final T defaultValue;
     private final Adapter<T> adapter;
     private final ContentObserverFactory contentObserverFactory;
     private final int type;
 
     RealSystemSetting(@NonNull ContentResolver contentResolver,
                       @NonNull String name,
+                      @NonNull T defaultValue,
                       @NonNull Adapter<T> adapter,
                       @NonNull ContentObserverFactory contentObserverFactory,
                       @SettingsType int type) {
         this.contentResolver = contentResolver;
         this.name = name;
+        this.defaultValue = defaultValue;
         this.adapter = adapter;
         this.contentObserverFactory = contentObserverFactory;
         this.type = type;
@@ -74,22 +77,12 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
     @NonNull
     @Override
     public T get() {
-        try {
-            return adapter.get(name, contentResolver, type);
-        } catch (Settings.SettingNotFoundException e) {
-            // rethrow
-            throw new RuntimeException(e);
-        }
+        return adapter.get(name, defaultValue, contentResolver, type);
     }
 
     @Override
     public void set(@NonNull T value) {
-        try {
-            adapter.set(name, value, contentResolver, type);
-        } catch (Settings.SettingNotFoundException e) {
-            // rethrow
-            throw new RuntimeException(e);
-        }
+        adapter.set(name, value, contentResolver, type);
     }
 
     @NonNull
