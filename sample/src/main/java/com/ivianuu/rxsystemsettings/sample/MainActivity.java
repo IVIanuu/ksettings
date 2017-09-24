@@ -39,16 +39,5 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("testtt", s);
                     }
                 });
-
-        SystemSetting<Integer> locationMode = systemSettings.getInt(
-                Settings.Secure.LOCATION_MODE, SettingsType.SECURE);
-
-        locationMode.observe()
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        Log.d("testtt", "location mode " + integer);
-                    }
-                });
     }
 }

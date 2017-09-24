@@ -17,12 +17,13 @@
 package com.ivianuu.rxsystemsettings;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 
 import com.ivianuu.rxsystemsettings.adapter.Adapter;
+
+import java.util.function.Consumer;
 
 import io.reactivex.Observable;
 
@@ -97,5 +98,11 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
         return contentObserverFactory.observe(getUri())
                 .startWith(this) // trigger initial value
                 .map(__ -> get());
+    }
+
+    @NonNull
+    @Override
+    public Consumer<T> consume() {
+        return this::set;
     }
 }

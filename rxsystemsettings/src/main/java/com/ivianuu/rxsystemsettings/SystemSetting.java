@@ -20,6 +20,8 @@ import android.net.Uri;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
+import java.util.function.Consumer;
+
 import io.reactivex.Observable;
 
 /**
@@ -51,4 +53,9 @@ public interface SystemSetting<T> {
      * Observes the changes of this system setting and emits the newest value
      */
     @CheckResult @NonNull Observable<T> observe();
+
+    /**
+     * Sets the value
+     */
+    @NonNull Consumer<T> consume();
 }
