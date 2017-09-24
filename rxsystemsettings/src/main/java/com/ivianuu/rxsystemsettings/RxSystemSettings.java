@@ -42,8 +42,6 @@ public final class RxSystemSettings {
                              @NonNull ContentObserverFactory contentObserverFactory) {
         this.contentResolver = contentResolver;
         this.contentObserverFactory = contentObserverFactory;
-
-        SettingsValidator.doesExist("jjf");
     }
 
     /**
