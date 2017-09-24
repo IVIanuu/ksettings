@@ -38,7 +38,7 @@ public interface SystemSetting<T> {
     /**
      * Returns the uri of this system setting
      */
-    @NonNull Uri getUri();
+    @NonNull Uri uri();
 
     /**
      * Returns the current value of this system setting
@@ -48,11 +48,15 @@ public interface SystemSetting<T> {
     /**
      * Sets the current value of this system setting
      */
-    @RequiresPermission(anyOf = {Manifest.permission.WRITE_SETTINGS, Manifest.permission.WRITE_SECURE_SETTINGS}, conditional = true)
     void set(@NonNull T value);
 
     /**
-     * Observes the changes of this system setting and emits the newest value
+     * Returns whether the device has the setting or not
+     */
+    boolean exists();
+
+    /**
+     * Emits the current value on subscribe and on changes
      */
     @CheckResult @NonNull Observable<T> observe();
 

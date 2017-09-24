@@ -35,8 +35,8 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
     private final String name;
     private final T defaultValue;
     private final Adapter<T> adapter;
-    private final ContentObserverFactory contentObserverFactory;
     private final int type;
+    private final Observable<T> values;
 
     RealSystemSetting(@NonNull ContentResolver contentResolver,
                       @NonNull String name,
@@ -48,8 +48,10 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
         this.name = name;
         this.defaultValue = defaultValue;
         this.adapter = adapter;
-        this.contentObserverFactory = contentObserverFactory;
         this.type = type;
+        this.values = contentObserverFactory.observe(uri())
+                .startWith(this) // trigger initial value
+                .map(__ -> get());
     }
 
     @NonNull
@@ -60,7 +62,7 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
 
     @NonNull
     @Override
-    public Uri getUri() {
+    public Uri uri() {
         switch (type) {
             case SettingsType.GLOBAL:
                 return Settings.Global.getUriFor(name);
@@ -84,12 +86,15 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
         adapter.set(name, value, contentResolver, type);
     }
 
+    @Override
+    public boolean exists() {
+        return SettingsValidator.doesExist(name);
+    }
+
     @NonNull
     @Override
     public Observable<T> observe() {
-        return contentObserverFactory.observe(getUri())
-                .startWith(this) // trigger initial value
-                .map(__ -> get());
+        return values;
     }
 
     @NonNull

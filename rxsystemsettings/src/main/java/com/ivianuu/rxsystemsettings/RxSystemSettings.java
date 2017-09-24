@@ -18,6 +18,7 @@ package com.ivianuu.rxsystemsettings;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 
 import com.ivianuu.rxsystemsettings.adapter.FloatAdapter;
@@ -41,6 +42,8 @@ public final class RxSystemSettings {
                              @NonNull ContentObserverFactory contentObserverFactory) {
         this.contentResolver = contentResolver;
         this.contentObserverFactory = contentObserverFactory;
+
+        SettingsValidator.doesExist("jjf");
     }
 
     /**
