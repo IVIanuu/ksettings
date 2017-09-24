@@ -52,6 +52,7 @@ public interface SystemSetting<T> {
 
     /**
      * Returns whether the device has the setting or not
+     * Note that this method will use reflection to check this
      */
     boolean exists();
 
