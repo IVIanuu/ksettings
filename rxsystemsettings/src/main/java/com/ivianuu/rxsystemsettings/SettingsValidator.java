@@ -18,9 +18,9 @@ package com.ivianuu.rxsystemsettings;
 
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
 /**
@@ -28,6 +28,9 @@ import java.util.HashMap;
  */
 final class SettingsValidator {
 
+    /**
+     * Cache results to avoid unnecessary reflection calls
+     */
     private static final HashMap<String, Boolean> CACHED = new HashMap<>();
 
     /**
@@ -38,7 +41,7 @@ final class SettingsValidator {
             return CACHED.get(name);
         }
 
-        boolean exists = false;
+        boolean exists;
 
         // global
         exists = doesGlobalSettingExists(name);
@@ -72,13 +75,19 @@ final class SettingsValidator {
 
     private static boolean checkFieldValues(Field[] fields, String value) {
         for (Field field : fields) {
+            // ignore private fields
+            if((field.getModifiers() & Modifier.PRIVATE) == Modifier.PRIVATE) continue;
+            // ignore non string values
+            if(!field.getType().isAssignableFrom(String.class)) continue;
+
             try {
                 String fieldValue = (String) field.get(null);
                 if (fieldValue.equals(value)) {
+                    // the field does exist
                     return true;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignore) {
+                // catch errors
             }
         }
 
