@@ -1,6 +1,7 @@
 package com.ivianuu.rxsystemsettings.sample;
 
 import android.provider.Settings;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,23 +21,19 @@ public class MainActivity extends AppCompatActivity {
 
         RxSystemSettings systemSettings = RxSystemSettings.create(this);
 
-        SystemSetting<Integer> hapticFeedback = systemSettings.getInt(
-                Settings.System.HAPTIC_FEEDBACK_ENABLED, SettingsType.SYSTEM);
+        SystemSetting<Integer> ambientDisplay = systemSettings.getInt("doze_enabled", SettingsType.SECURE);
 
-        hapticFeedback.observe()
-                .subscribe(integer -> {
-                    Log.d("testtt", "haptic feedback is now on ? " + String.valueOf(integer == 1));
-                });
+        ambientDisplay.observe()
+                .subscribe(ambientDisplay.consume());
 
-
-        SystemSetting<String> accessibility = systemSettings.getString(
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, SettingsType.SECURE);
-
-        accessibility.observe()
-                .subscribe(new Consumer<String>() {
+        ambientDisplay.observe()
+                .subscribe(new Consumer<Integer>() {
                     @Override
-                    public void accept(String s) throws Exception {
-                        Log.d("testtt", s);
+                    public void accept(Integer integer) throws Exception {
+                        Log.d("testt", "hello " + integer);
+                        if (integer == 0) {
+                            ambientDisplay.set(1);
+                        }
                     }
                 });
     }

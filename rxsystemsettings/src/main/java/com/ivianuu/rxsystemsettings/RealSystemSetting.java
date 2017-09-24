@@ -23,9 +23,8 @@ import android.support.annotation.NonNull;
 
 import com.ivianuu.rxsystemsettings.adapter.Adapter;
 
-import java.util.function.Consumer;
-
 import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Implementation of an system setting
