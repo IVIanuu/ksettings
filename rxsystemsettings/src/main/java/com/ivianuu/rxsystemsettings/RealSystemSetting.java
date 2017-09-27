@@ -26,6 +26,8 @@ import com.ivianuu.rxsystemsettings.adapter.Adapter;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
+import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+
 /**
  * Implementation of an system setting
  */
@@ -83,6 +85,7 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
 
     @Override
     public void set(@NonNull T value) {
+        checkNotNull(value, "value == null");
         adapter.set(name, value, contentResolver, type);
     }
 

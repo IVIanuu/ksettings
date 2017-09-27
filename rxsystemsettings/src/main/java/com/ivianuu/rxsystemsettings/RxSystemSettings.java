@@ -25,6 +25,8 @@ import com.ivianuu.rxsystemsettings.adapter.IntegerAdapter;
 import com.ivianuu.rxsystemsettings.adapter.LongAdapter;
 import com.ivianuu.rxsystemsettings.adapter.StringAdapter;
 
+import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+
 /**
  * Rx system settings
  */
@@ -48,6 +50,7 @@ public final class RxSystemSettings {
      */
     @NonNull
     public static RxSystemSettings create(@NonNull Context context) {
+        checkNotNull(context, "context == null");
         return new RxSystemSettings(
                 context.getContentResolver(), new ContentObserverFactory(context));
     }
@@ -66,6 +69,8 @@ public final class RxSystemSettings {
     @NonNull
     public SystemSetting<Float> getFloat(@NonNull String name, @NonNull Float defaultValue,
                                          @SettingsType int type) {
+        checkNotNull(name, "name == null");
+        checkNotNull(defaultValue, "defaultValue == null");
         return new RealSystemSetting<>(
                 contentResolver, name, defaultValue, FloatAdapter.INSTANCE, contentObserverFactory, type);
     }
@@ -84,6 +89,8 @@ public final class RxSystemSettings {
     @NonNull
     public SystemSetting<Integer> getInteger(@NonNull String name, @NonNull Integer defaultValue,
                                              @SettingsType int type) {
+        checkNotNull(name, "name == null");
+        checkNotNull(defaultValue, "defaultValue == null");
         return new RealSystemSetting<>(
                 contentResolver, name, defaultValue, IntegerAdapter.INSTANCE, contentObserverFactory, type);
     }
@@ -102,6 +109,8 @@ public final class RxSystemSettings {
     @NonNull
     public SystemSetting<Long> getLong(@NonNull String name, @NonNull Long defaultValue,
                                        @SettingsType int type) {
+        checkNotNull(name, "name == null");
+        checkNotNull(defaultValue, "defaultValue == null");
         return new RealSystemSetting<>(
                 contentResolver, name, defaultValue, LongAdapter.INSTANCE, contentObserverFactory, type);
     }
@@ -120,6 +129,8 @@ public final class RxSystemSettings {
     @NonNull
     public SystemSetting<String> getString(@NonNull String name, @NonNull String defaultValue,
                                            @SettingsType int type) {
+        checkNotNull(name, "name == null");
+        checkNotNull(defaultValue, "defaultValue == null");
         return new RealSystemSetting<>(
                 contentResolver, name, defaultValue, StringAdapter.INSTANCE, contentObserverFactory, type);
     }
