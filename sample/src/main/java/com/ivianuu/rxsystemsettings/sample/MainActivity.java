@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         ambientDisplay.observe()
                 .subscribe(integer -> {
-                    Log.d("testt", "hello " + integer);
+                    Log.d("testt", "helo " + integer);
                     if (integer == 0) {
                         ambientDisplay.set(1);
                     }
