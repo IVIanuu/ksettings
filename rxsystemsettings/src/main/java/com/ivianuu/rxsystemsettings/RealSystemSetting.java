@@ -53,7 +53,8 @@ final class RealSystemSetting<T> implements SystemSetting<T> {
         this.type = type;
         this.values = contentObserverFactory.observe(uri())
                 .startWith(this) // trigger initial value
-                .map(__ -> get());
+                .map(__ -> get())
+                .share();
     }
 
     @NonNull
