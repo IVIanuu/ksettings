@@ -25,7 +25,7 @@ import com.ivianuu.rxsystemsettings.adapter.IntegerAdapter;
 import com.ivianuu.rxsystemsettings.adapter.LongAdapter;
 import com.ivianuu.rxsystemsettings.adapter.StringAdapter;
 
-import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+import static com.ivianuu.rxsystemsettings.Preconditions.checkNotNull;
 
 /**
  * Rx system settings

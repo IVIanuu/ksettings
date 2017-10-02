@@ -26,7 +26,7 @@ import com.ivianuu.rxsystemsettings.adapter.Adapter;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
-import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+import static com.ivianuu.rxsystemsettings.Preconditions.checkNotNull;
 
 /**
  * Implementation of an system setting
