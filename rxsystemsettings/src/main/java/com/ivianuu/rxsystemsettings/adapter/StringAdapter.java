@@ -37,16 +37,22 @@ public final class StringAdapter implements Adapter<String> {
                       @NonNull String defaultValue,
                       @NonNull ContentResolver contentResolver,
                       @SettingsType int type) {
+        String value;
         switch (type) {
             case SettingsType.GLOBAL:
-                return Settings.Global.getString(contentResolver, name);
+                value = Settings.Global.getString(contentResolver, name);
+                break;
             case SettingsType.SECURE:
-                return Settings.Secure.getString(contentResolver, name);
+                value = Settings.Secure.getString(contentResolver, name);
+                break;
             case SettingsType.SYSTEM:
-                return Settings.System.getString(contentResolver, name);
+                value = Settings.System.getString(contentResolver, name);
+                break;
             default:
                 throw new IllegalArgumentException("unknown type " + type);
         }
+
+        return value != null ? value : defaultValue;
     }
 
     @Override
