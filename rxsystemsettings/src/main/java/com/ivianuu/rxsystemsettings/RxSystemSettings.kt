@@ -1,0 +1,90 @@
+/*
+ * Copyright 2017 Manuel Wrage
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.ivianuu.rxsystemsettings
+
+import android.content.ContentResolver
+import android.content.Context
+
+/**
+ * Rx system settings
+ */
+class RxSystemSettings private constructor(private val contentResolver: ContentResolver,
+                                           private val contentObserverFactory: ContentObserverFactory
+) {
+
+    /**
+     * Returns a new [SystemSetting] of type [Float]
+     */
+    @JvmOverloads
+    fun getFloat(name: String,
+                 type: SettingsType,
+                 defaultValue: Float = DEFAULT_FLOAT
+    ): SystemSetting<Float> =
+            RealSystemSetting(
+                    contentResolver, name, defaultValue, FloatAdapter,
+                    contentObserverFactory, type)
+
+    /**
+     * Returns a new [SystemSetting] of type [Int]
+     */
+    @JvmOverloads
+    fun getInteger(name: String,
+                   type: SettingsType,
+                   defaultValue: Int = DEFAULT_INTEGER
+    ): SystemSetting<Int> =
+            RealSystemSetting(
+                    contentResolver, name, defaultValue, IntegerAdapter, contentObserverFactory, type)
+    
+    /**
+     * Returns a new long system setting
+     */
+    @JvmOverloads
+    fun getLong(name: String,
+                type: SettingsType,
+                defaultValue: Long = DEFAULT_LONG
+    ): SystemSetting<Long> =
+            RealSystemSetting(
+                    contentResolver, name, defaultValue, LongAdapter, contentObserverFactory, type)
+
+    /**
+     * Returns a new string system setting
+     */
+    @JvmOverloads
+    fun getString(name: String,
+                  type: SettingsType,
+                  defaultValue: String = DEFAULT_STRING
+    ): SystemSetting<String> =
+            RealSystemSetting(
+                    contentResolver, name, defaultValue, StringAdapter, contentObserverFactory,
+                    type)
+
+    companion object {
+        private val DEFAULT_FLOAT = 0f
+        private val DEFAULT_INTEGER = 0
+        private val DEFAULT_LONG = 0L
+        private val DEFAULT_STRING = ""
+
+        /**
+         * Returns a new [RxSystemSettings] instance
+         */
+        @JvmStatic
+        fun create(context: Context): RxSystemSettings {
+            return RxSystemSettings(
+                    context.contentResolver, ContentObserverFactory(context))
+        }
+    }
+}

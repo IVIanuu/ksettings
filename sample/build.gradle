@@ -15,10 +15,10 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.ivianuu.rxsystemsettings.sample"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -26,17 +26,15 @@ android {
         versionCode 1
         versionName "1.0"
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
-    // RxSystemSettings
-    implementation project(':rxsystemsettings')
-
     // Android Support
     implementation rootProject.ext.supportAppCompat
+
+    // Kotlin
+    implementation rootProject.ext.kotlinStdlib
+
+    // RxSystemSettings
+    implementation project(':rxsystemsettings')
 }

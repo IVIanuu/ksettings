@@ -14,33 +14,25 @@
  * limitations under the License.
  */
 
-package com.ivianuu.rxsystemsettings;
+package com.ivianuu.rxsystemsettings
 
-import android.content.Context;
-import android.net.Uri;
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
+import android.content.Context
+import android.net.Uri
+import android.support.annotation.CheckResult
 
-import com.ivianuu.rxcontentobserver.RxContentObserver;
+import com.ivianuu.rxcontentobserver.RxContentObserver
 
-import io.reactivex.Observable;
+import io.reactivex.Observable
 
 /**
  * Creates content observer observables
  */
-final class ContentObserverFactory {
-
-    private final Context context;
-
-    ContentObserverFactory(@NonNull Context context) {
-        this.context = context;
-    }
+internal class ContentObserverFactory(private val context: Context) {
 
     /**
      * Emits on content changes of the uri
      */
-    @CheckResult @NonNull
-    Observable<Object> observe(@NonNull Uri uri) {
-        return RxContentObserver.observe(context, uri).cast(Object.class);
-    }
+    @CheckResult
+    fun observe(uri: Uri): Observable<Any> =
+            RxContentObserver.observe(context, uri).cast(Any::class.java)
 }

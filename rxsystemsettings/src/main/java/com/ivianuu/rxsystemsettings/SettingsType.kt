@@ -14,26 +14,11 @@
  * limitations under the License.
  */
 
-package com.ivianuu.rxsystemsettings;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+package com.ivianuu.rxsystemsettings
 
 /**
- * Preconditions
+ * Types of system settings
  */
-final class Preconditions {
-
-    private Preconditions() {
-        // no instances
-    }
-
-    /**
-     * Throws a npe if the object is null
-     */
-    static void checkNotNull(@Nullable Object o, @NonNull String message) {
-        if (o == null) {
-            throw new NullPointerException(message);
-        }
-    }
+enum class SettingsType {
+    GLOBAL, SECURE, SYSTEM
 }
