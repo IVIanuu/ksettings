@@ -28,13 +28,13 @@ buildscript {
 
         mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
-        supportVersion = '27.0.1'
+        supportVersion = '27.0.2'
         supportAnnotations = "com.android.support:support-annotations:$supportVersion"
         supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
 
         rxContentObserver = 'com.github.IVIanuu:RxContentObserver:1.0.0'
 
-        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.7'
+        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.8'
     }
 
     repositories {
