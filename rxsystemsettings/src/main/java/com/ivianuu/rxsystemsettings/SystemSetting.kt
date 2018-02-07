@@ -78,17 +78,9 @@ internal class RealSystemSetting<T>(private val contentResolver: ContentResolver
                                     private val name: String,
                                     private val defaultValue: T,
                                     private val adapter: Adapter<T>,
-                                    contentObserverFactory: ContentObserverFactory,
+                                    private val contentObserverFactory: ContentObserverFactory,
                                     private val type: SettingsType
 ) : SystemSetting<T> {
-    private val values: Observable<T>
-
-    init {
-        this.values = contentObserverFactory.observe(uri())
-                .map { get() }
-                .startWith(get()) // trigger initial value
-                .share()
-    }
 
     override fun name() = name
 
@@ -108,7 +100,9 @@ internal class RealSystemSetting<T>(private val contentResolver: ContentResolver
 
     override fun exists() = SettingsValidator.doesExist(name)
 
-    override fun observe() = values
+    override fun observe() = contentObserverFactory.observe(uri())
+        .map { get() }
+        .startWith(get()) // trigger initial value
 
     override fun consume() = Consumer<T> { this.set(it) }
 }
