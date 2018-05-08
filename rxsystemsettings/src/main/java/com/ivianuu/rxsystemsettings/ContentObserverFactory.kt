@@ -18,7 +18,6 @@ package com.ivianuu.rxsystemsettings
 
 import android.content.Context
 import android.net.Uri
-import android.support.annotation.CheckResult
 
 import com.ivianuu.rxcontentobserver.RxContentObserver
 
@@ -29,10 +28,6 @@ import io.reactivex.Observable
  */
 internal class ContentObserverFactory(private val context: Context) {
 
-    /**
-     * Emits on content changes of the uri
-     */
-    @CheckResult
     fun observe(uri: Uri): Observable<Any> =
-            RxContentObserver.observe(context, uri).cast(Any::class.java)
+        RxContentObserver.observe(context, uri).cast(Any::class.java)
 }

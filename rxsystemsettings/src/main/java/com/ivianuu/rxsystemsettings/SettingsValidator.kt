@@ -17,19 +17,15 @@
 package com.ivianuu.rxsystemsettings
 
 import android.provider.Settings
-
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
-import java.util.HashMap
+import java.util.*
 
 /**
  * Checks if a specific setting exists
  */
 internal object SettingsValidator {
 
-    /**
-     * Cache results to avoid unnecessary reflection calls
-     */
     private val CACHED = HashMap<String, Boolean>()
 
     /**

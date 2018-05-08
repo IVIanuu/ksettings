@@ -19,7 +19,6 @@ package com.ivianuu.rxsystemsettings
 import android.content.ContentResolver
 import android.net.Uri
 import android.provider.Settings
-import android.support.annotation.CheckResult
 
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer
@@ -29,68 +28,42 @@ import io.reactivex.functions.Consumer
  */
 interface SystemSetting<T> {
 
-    /**
-     * Returns the name of this system setting
-     */
-    fun name(): String
+    val name: String
 
-    /**
-     * Returns the [Uri] of this system setting
-     */
-    fun uri(): Uri
+    val uri: Uri
 
-    /**
-     * Returns the [SettingsType] of this system setting
-     */
-    fun type(): SettingsType
+    val type: SettingsType
 
-    /**
-     * Returns the current value of this system setting
-     */
     fun get(): T
 
-    /**
-     * Sets the current value of this system setting
-     */
     fun set(value: T)
 
-    /**
-     * Returns whether the device has the setting or not
-     * Note that this method will use reflection to check this
-     */
     fun exists(): Boolean
 
-    /**
-     * Emits the current value on subscribe and on changes
-     */
-    @CheckResult fun observe(): Observable<T>
+    fun observe(): Observable<T>
 
-    /**
-     * Sets the value
-     */
     fun consume(): Consumer<T>
+
 }
 
 /**
  * Implementation of an [SystemSetting]
  */
-internal class RealSystemSetting<T>(private val contentResolver: ContentResolver,
-                                    private val name: String,
-                                    private val defaultValue: T,
-                                    private val adapter: Adapter<T>,
-                                    private val contentObserverFactory: ContentObserverFactory,
-                                    private val type: SettingsType
+internal class RealSystemSetting<T>(
+    private val contentResolver: ContentResolver,
+    override val name: String,
+    private val defaultValue: T,
+    private val adapter: Adapter<T>,
+    private val contentObserverFactory: ContentObserverFactory,
+    override val type: SettingsType
 ) : SystemSetting<T> {
 
-    override fun name() = name
-
-    override fun uri(): Uri = when (type) {
-        SettingsType.GLOBAL -> Settings.Global.getUriFor(name)
-        SettingsType.SECURE -> Settings.Secure.getUriFor(name)
-        SettingsType.SYSTEM -> Settings.System.getUriFor(name)
-    }
-
-    override fun type(): SettingsType = type
+    override val uri: Uri
+        get() = when (type) {
+            SettingsType.GLOBAL -> Settings.Global.getUriFor(name)
+            SettingsType.SECURE -> Settings.Secure.getUriFor(name)
+            SettingsType.SYSTEM -> Settings.System.getUriFor(name)
+        }
 
     override fun get() = adapter[name, defaultValue, contentResolver, type]
 
@@ -100,7 +73,7 @@ internal class RealSystemSetting<T>(private val contentResolver: ContentResolver
 
     override fun exists() = SettingsValidator.doesExist(name)
 
-    override fun observe() = contentObserverFactory.observe(uri())
+    override fun observe(): Observable<T> = contentObserverFactory.observe(uri)
         .map { get() }
         .startWith(get()) // trigger initial value
 

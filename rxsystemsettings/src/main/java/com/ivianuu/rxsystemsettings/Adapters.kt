@@ -24,22 +24,18 @@ import android.provider.Settings
  */
 internal interface Adapter<T> {
 
-    /**
-     * Returns the value of this name
-     */
-    operator fun get(name: String,
-                     defaultValue: T,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    operator fun get(
+        name: String,
+        defaultValue: T,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ): T
 
-    /**
-     * Sets the value of this name
-     */
-    operator fun set(name: String,
-                     value: T,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    operator fun set(
+        name: String,
+        value: T,
+        contentResolver: ContentResolver,
+        type: SettingsType
     )
 }
 
@@ -48,24 +44,32 @@ internal interface Adapter<T> {
  */
 object FloatAdapter : Adapter<Float> {
 
-    override fun get(name: String,
-                     defaultValue: Float,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun get(
+        name: String,
+        defaultValue: Float,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ): Float =
-            when (type) {
-                SettingsType.GLOBAL -> Settings.Global.getFloat(contentResolver, name,
-                        defaultValue)
-                SettingsType.SECURE -> Settings.Secure.getFloat(contentResolver, name,
-                        defaultValue)
-                SettingsType.SYSTEM -> Settings.System.getFloat(contentResolver, name,
-                        defaultValue)
-            }
+        when (type) {
+            SettingsType.GLOBAL -> Settings.Global.getFloat(
+                contentResolver, name,
+                defaultValue
+            )
+            SettingsType.SECURE -> Settings.Secure.getFloat(
+                contentResolver, name,
+                defaultValue
+            )
+            SettingsType.SYSTEM -> Settings.System.getFloat(
+                contentResolver, name,
+                defaultValue
+            )
+        }
 
-    override fun set(name: String,
-                     value: Float,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun set(
+        name: String,
+        value: Float,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ) {
         when (type) {
             SettingsType.GLOBAL -> Settings.Global.putFloat(contentResolver, name, value)
@@ -80,24 +84,32 @@ object FloatAdapter : Adapter<Float> {
  */
 internal object IntegerAdapter : Adapter<Int> {
 
-    override fun get(name: String,
-                     defaultValue: Int,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun get(
+        name: String,
+        defaultValue: Int,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ): Int =
-            when (type) {
-                SettingsType.GLOBAL -> Settings.Global.getInt(contentResolver, name,
-                        defaultValue)
-                SettingsType.SECURE -> Settings.Secure.getInt(contentResolver, name,
-                        defaultValue)
-                SettingsType.SYSTEM -> Settings.System.getInt(contentResolver, name,
-                        defaultValue)
-            }
+        when (type) {
+            SettingsType.GLOBAL -> Settings.Global.getInt(
+                contentResolver, name,
+                defaultValue
+            )
+            SettingsType.SECURE -> Settings.Secure.getInt(
+                contentResolver, name,
+                defaultValue
+            )
+            SettingsType.SYSTEM -> Settings.System.getInt(
+                contentResolver, name,
+                defaultValue
+            )
+        }
 
-    override fun set(name: String,
-                     value: Int,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun set(
+        name: String,
+        value: Int,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ) {
         when (type) {
             SettingsType.GLOBAL -> Settings.Global.putInt(contentResolver, name, value)
@@ -112,23 +124,31 @@ internal object IntegerAdapter : Adapter<Int> {
  */
 object LongAdapter : Adapter<Long> {
 
-    override fun get(name: String,
-                     defaultValue: Long,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun get(
+        name: String,
+        defaultValue: Long,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ): Long = when (type) {
-                SettingsType.GLOBAL -> Settings.Global.getLong(contentResolver, name,
-                        defaultValue)
-                SettingsType.SECURE -> Settings.Secure.getLong(contentResolver, name,
-                        defaultValue)
-                SettingsType.SYSTEM -> Settings.System.getLong(contentResolver, name,
-                        defaultValue)
+        SettingsType.GLOBAL -> Settings.Global.getLong(
+            contentResolver, name,
+            defaultValue
+        )
+        SettingsType.SECURE -> Settings.Secure.getLong(
+            contentResolver, name,
+            defaultValue
+        )
+        SettingsType.SYSTEM -> Settings.System.getLong(
+            contentResolver, name,
+            defaultValue
+        )
     }
 
-    override fun set(name: String,
-                     value: Long,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun set(
+        name: String,
+        value: Long,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ) {
         when (type) {
             SettingsType.GLOBAL -> Settings.Global.putLong(contentResolver, name, value)
@@ -143,10 +163,11 @@ object LongAdapter : Adapter<Long> {
  */
 object StringAdapter : Adapter<String> {
 
-    override fun get(name: String,
-                     defaultValue: String,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun get(
+        name: String,
+        defaultValue: String,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ): String {
         val value: String? = when (type) {
             SettingsType.GLOBAL -> Settings.Global.getString(contentResolver, name)
@@ -157,10 +178,11 @@ object StringAdapter : Adapter<String> {
         return value ?: defaultValue
     }
 
-    override fun set(name: String,
-                     value: String,
-                     contentResolver: ContentResolver,
-                     type: SettingsType
+    override fun set(
+        name: String,
+        value: String,
+        contentResolver: ContentResolver,
+        type: SettingsType
     ) {
         when (type) {
             SettingsType.GLOBAL -> Settings.Global.putString(contentResolver, name, value)

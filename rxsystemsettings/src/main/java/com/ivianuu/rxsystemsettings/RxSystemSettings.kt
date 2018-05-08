@@ -22,69 +22,64 @@ import android.content.Context
 /**
  * Rx system settings
  */
-class RxSystemSettings private constructor(private val contentResolver: ContentResolver,
-                                           private val contentObserverFactory: ContentObserverFactory
+class RxSystemSettings private constructor(
+    private val contentResolver: ContentResolver,
+    private val contentObserverFactory: ContentObserverFactory
 ) {
 
-    /**
-     * Returns a new [SystemSetting] of type [Float]
-     */
     @JvmOverloads
-    fun getFloat(name: String,
-                 type: SettingsType,
-                 defaultValue: Float = DEFAULT_FLOAT
+    fun getFloat(
+        name: String,
+        type: SettingsType,
+        defaultValue: Float = DEFAULT_FLOAT
     ): SystemSetting<Float> =
-            RealSystemSetting(
-                    contentResolver, name, defaultValue, FloatAdapter,
-                    contentObserverFactory, type)
+        RealSystemSetting(
+            contentResolver, name, defaultValue, FloatAdapter,
+            contentObserverFactory, type
+        )
 
-    /**
-     * Returns a new [SystemSetting] of type [Int]
-     */
     @JvmOverloads
-    fun getInteger(name: String,
-                   type: SettingsType,
-                   defaultValue: Int = DEFAULT_INTEGER
+    fun getInteger(
+        name: String,
+        type: SettingsType,
+        defaultValue: Int = DEFAULT_INTEGER
     ): SystemSetting<Int> =
-            RealSystemSetting(
-                    contentResolver, name, defaultValue, IntegerAdapter, contentObserverFactory, type)
-    
-    /**
-     * Returns a new long system setting
-     */
-    @JvmOverloads
-    fun getLong(name: String,
-                type: SettingsType,
-                defaultValue: Long = DEFAULT_LONG
-    ): SystemSetting<Long> =
-            RealSystemSetting(
-                    contentResolver, name, defaultValue, LongAdapter, contentObserverFactory, type)
+        RealSystemSetting(
+            contentResolver, name, defaultValue, IntegerAdapter, contentObserverFactory, type
+        )
 
-    /**
-     * Returns a new string system setting
-     */
     @JvmOverloads
-    fun getString(name: String,
-                  type: SettingsType,
-                  defaultValue: String = DEFAULT_STRING
+    fun getLong(
+        name: String,
+        type: SettingsType,
+        defaultValue: Long = DEFAULT_LONG
+    ): SystemSetting<Long> =
+        RealSystemSetting(
+            contentResolver, name, defaultValue, LongAdapter, contentObserverFactory, type
+        )
+
+    @JvmOverloads
+    fun getString(
+        name: String,
+        type: SettingsType,
+        defaultValue: String = DEFAULT_STRING
     ): SystemSetting<String> =
-            RealSystemSetting(
-                    contentResolver, name, defaultValue, StringAdapter, contentObserverFactory,
-                    type)
+        RealSystemSetting(
+            contentResolver, name, defaultValue, StringAdapter, contentObserverFactory,
+            type
+        )
 
     companion object {
-        private val DEFAULT_FLOAT = 0f
-        private val DEFAULT_INTEGER = 0
-        private val DEFAULT_LONG = 0L
-        private val DEFAULT_STRING = ""
+        private const val DEFAULT_FLOAT = 0f
+        private const val DEFAULT_INTEGER = 0
+        private const val DEFAULT_LONG = 0L
+        private const val DEFAULT_STRING = ""
 
-        /**
-         * Returns a new [RxSystemSettings] instance
-         */
         @JvmStatic
         fun create(context: Context): RxSystemSettings {
             return RxSystemSettings(
-                    context.contentResolver, ContentObserverFactory(context))
+                context.contentResolver, ContentObserverFactory(context)
+            )
         }
     }
 }

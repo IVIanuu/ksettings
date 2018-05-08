@@ -1,14 +1,10 @@
 package com.ivianuu.rxsystemsettings.sample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-
 import com.ivianuu.rxsystemsettings.RxSystemSettings
 import com.ivianuu.rxsystemsettings.SettingsType
-import com.ivianuu.rxsystemsettings.SystemSetting
-
-import io.reactivex.functions.Consumer
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,9 +19,6 @@ class MainActivity : AppCompatActivity() {
         ambientDisplay.observe()
                 .subscribe { integer ->
                     Log.d("testt", "helo " + integer!!)
-                    if (integer == 0) {
-                        ambientDisplay.set(1)
-                    }
                 }
     }
 }
