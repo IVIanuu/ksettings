@@ -18,6 +18,10 @@ package com.ivianuu.rxsystemsettings
 
 import android.content.ContentResolver
 import android.content.Context
+import com.ivianuu.rxsystemsettings.adapter.FloatAdapter
+import com.ivianuu.rxsystemsettings.adapter.IntAdapter
+import com.ivianuu.rxsystemsettings.adapter.LongAdapter
+import com.ivianuu.rxsystemsettings.adapter.StringAdapter
 
 /**
  * Rx system settings
@@ -39,13 +43,13 @@ class RxSystemSettings private constructor(
         )
 
     @JvmOverloads
-    fun getInteger(
+    fun getInt(
         name: String,
         type: SettingsType,
-        defaultValue: Int = DEFAULT_INTEGER
+        defaultValue: Int = DEFAULT_INT
     ): SystemSetting<Int> =
         RealSystemSetting(
-            contentResolver, name, defaultValue, IntegerAdapter, contentObserverFactory, type
+            contentResolver, name, defaultValue, IntAdapter, contentObserverFactory, type
         )
 
     @JvmOverloads
@@ -71,7 +75,7 @@ class RxSystemSettings private constructor(
 
     companion object {
         private const val DEFAULT_FLOAT = 0f
-        private const val DEFAULT_INTEGER = 0
+        private const val DEFAULT_INT = 0
         private const val DEFAULT_LONG = 0L
         private const val DEFAULT_STRING = ""
 

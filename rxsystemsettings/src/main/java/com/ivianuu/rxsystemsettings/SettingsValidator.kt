@@ -28,32 +28,25 @@ internal object SettingsValidator {
 
     private val CACHED = HashMap<String, Boolean>()
 
-    /**
-     * Returns whether the setting exists or not
-     */
     fun doesExist(name: String): Boolean {
-        if (CACHED.containsKey(name)) {
-            return CACHED.get(name)!!
+        return CACHED.getOrPut(name) {
+            var exists: Boolean
+
+            // global
+            exists = doesGlobalSettingExists(name)
+
+            // secure
+            if (!exists) {
+                exists = doesSecureSettingExists(name)
+            }
+
+            // system
+            if (!exists) {
+                exists = doesSystemSettingExists(name)
+            }
+
+            exists
         }
-
-        var exists: Boolean
-
-        // global
-        exists = doesGlobalSettingExists(name)
-
-        // secure
-        if (!exists) {
-            exists = doesSecureSettingExists(name)
-        }
-
-        // system
-        if (!exists) {
-            exists = doesSystemSettingExists(name)
-        }
-
-
-        CACHED.put(name, exists)
-        return exists
     }
 
     private fun doesGlobalSettingExists(name: String): Boolean {

@@ -16,10 +16,7 @@
 
 package com.ivianuu.rxsystemsettings
 
-import android.content.ContentResolver
 import android.net.Uri
-import android.provider.Settings
-
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer
 
@@ -44,38 +41,4 @@ interface SystemSetting<T> {
 
     fun consume(): Consumer<T>
 
-}
-
-/**
- * Implementation of an [SystemSetting]
- */
-internal class RealSystemSetting<T>(
-    private val contentResolver: ContentResolver,
-    override val name: String,
-    private val defaultValue: T,
-    private val adapter: Adapter<T>,
-    private val contentObserverFactory: ContentObserverFactory,
-    override val type: SettingsType
-) : SystemSetting<T> {
-
-    override val uri: Uri
-        get() = when (type) {
-            SettingsType.GLOBAL -> Settings.Global.getUriFor(name)
-            SettingsType.SECURE -> Settings.Secure.getUriFor(name)
-            SettingsType.SYSTEM -> Settings.System.getUriFor(name)
-        }
-
-    override fun get() = adapter[name, defaultValue, contentResolver, type]
-
-    override fun set(value: T) {
-        adapter[name, value, contentResolver] = type
-    }
-
-    override fun exists() = SettingsValidator.doesExist(name)
-
-    override fun observe(): Observable<T> = contentObserverFactory.observe(uri)
-        .map { get() }
-        .startWith(get()) // trigger initial value
-
-    override fun consume() = Consumer<T> { this.set(it) }
 }

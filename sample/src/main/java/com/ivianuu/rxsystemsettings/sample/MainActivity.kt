@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.ivianuu.rxsystemsettings.RxSystemSettings
 import com.ivianuu.rxsystemsettings.SettingsType
+import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {
+
+    private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,11 +17,16 @@ class MainActivity : AppCompatActivity() {
 
         val systemSettings = RxSystemSettings.create(this)
 
-        val ambientDisplay = systemSettings.getInteger("doze_enabled", SettingsType.SECURE)
+        val ambientDisplay = systemSettings.getInt("doze_enabled", SettingsType.SECURE)
 
-        ambientDisplay.observe()
-                .subscribe { integer ->
-                    Log.d("testt", "helo " + integer!!)
+        disposable = ambientDisplay.observe()
+                .subscribe {
+                    Log.d("RxSystemSettings", "ambient display changed $it")
                 }
+    }
+
+    override fun onDestroy() {
+        disposable?.dispose()
+        super.onDestroy()
     }
 }

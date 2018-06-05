@@ -14,21 +14,27 @@
  * limitations under the License.
  */
 
-package com.ivianuu.rxsystemsettings
+package com.ivianuu.rxsystemsettings.adapter
 
-import android.content.Context
-import android.net.Uri
-
-import com.ivianuu.rxcontentobserver.RxContentObserver
-
-import io.reactivex.Observable
+import android.content.ContentResolver
+import com.ivianuu.rxsystemsettings.SettingsType
 
 /**
- * Creates content observer observables
+ * Reads and writes [T] from system settings
  */
-internal class ContentObserverFactory(private val context: Context) {
+internal interface Adapter<T> {
 
-    fun observe(uri: Uri): Observable<Any> =
-        RxContentObserver.observe(context, uri)
-            .cast(Any::class.java)
+    operator fun get(
+        name: String,
+        defaultValue: T,
+        contentResolver: ContentResolver,
+        type: SettingsType
+    ): T
+
+    operator fun set(
+        name: String,
+        value: T,
+        contentResolver: ContentResolver,
+        type: SettingsType
+    )
 }
