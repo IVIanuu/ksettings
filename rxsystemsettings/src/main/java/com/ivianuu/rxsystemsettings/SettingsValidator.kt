@@ -65,6 +65,7 @@ internal object SettingsValidator {
         for (field in fields) {
             // ignore private fields
             if (field.modifiers and Modifier.PRIVATE == Modifier.PRIVATE) continue
+
             // ignore non string values
             if (!field.type.isAssignableFrom(String::class.java)) continue
 

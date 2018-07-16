@@ -80,10 +80,8 @@ class RxSystemSettings private constructor(
         private const val DEFAULT_STRING = ""
 
         @JvmStatic
-        fun create(context: Context): RxSystemSettings {
-            return RxSystemSettings(
-                context.contentResolver, ContentObserverFactory(context)
-            )
-        }
+        fun create(context: Context) = RxSystemSettings(
+            context.contentResolver, ContentObserverFactory(context)
+        )
     }
 }

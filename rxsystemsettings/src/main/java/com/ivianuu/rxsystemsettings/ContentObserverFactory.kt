@@ -17,18 +17,34 @@
 package com.ivianuu.rxsystemsettings
 
 import android.content.Context
+import android.database.ContentObserver
 import android.net.Uri
-
-import com.ivianuu.rxcontentobserver.RxContentObserver
+import android.os.Handler
 
 import io.reactivex.Observable
 
 /**
  * Creates content observer observables
  */
-internal class ContentObserverFactory(private val context: Context) {
+internal class ContentObserverFactory(
+    private val context: Context
+) {
 
-    fun observe(uri: Uri): Observable<Any> =
-        RxContentObserver.observe(context, uri)
-            .cast(Any::class.java)
+    private val handler = Handler()
+
+    fun observe(uri: Uri): Observable<Unit> = Observable.create { e ->
+        val observer = object : ContentObserver(handler) {
+            override fun onChange(selfChange: Boolean) {
+                super.onChange(selfChange)
+                e.onNext(Unit)
+            }
+
+            override fun deliverSelfNotifications() = false
+        }
+
+        e.setCancellable { context.contentResolver.unregisterContentObserver(observer) }
+
+        context.contentResolver
+            .registerContentObserver(uri, false, observer)
+    }
 }

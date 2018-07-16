@@ -17,9 +17,6 @@ dependencies {
     // Kotlin
     api Deps.kotlinStdLib
 
-    // RxContentObserver
-    api Deps.rxContentObserver
-
     // RxJava
     api Deps.rxJava
 }
