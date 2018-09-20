@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Manuel Wrage
+ * Copyright 2018 Manuel Wrage
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,4 +14,22 @@
  * limitations under the License.
  */
 
-include ':sample', ':ksystemsettings', ':ksystemsettings-rx', ':ksystemsettings-coroutines', ':ksystemsettings-lifecycle'
+package com.ivianuu.ksystemsettings.lifecycle
+
+import androidx.lifecycle.Lifecycle
+import com.ivianuu.ksystemsettings.KSystemSettingsPlugins
+
+private var _defaultRemoveEvent = Lifecycle.Event.ON_DESTROY
+    set(value) {
+        value.checkValid()
+        field = value
+    }
+
+/**
+ * The default remove event when addListener with a lifecycle owner is used
+ */
+var KSystemSettingsPlugins.defaultRemoveEvent: Lifecycle.Event
+    get() = _defaultRemoveEvent
+    set(value) {
+        _defaultRemoveEvent = value
+    }

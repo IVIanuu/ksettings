@@ -14,4 +14,11 @@
  * limitations under the License.
  */
 
-include ':sample', ':ksystemsettings', ':ksystemsettings-rx', ':ksystemsettings-coroutines', ':ksystemsettings-lifecycle'
+package com.ivianuu.ksystemsettings
+
+/**
+ * Types of system settings
+ */
+enum class SettingsType {
+    GLOBAL, SECURE, SYSTEM
+}

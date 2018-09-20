@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Manuel Wrage
+ * Copyright 2018 Manuel Wrage
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,4 +14,9 @@
  * limitations under the License.
  */
 
-include ':sample', ':ksystemsettings', ':ksystemsettings-rx', ':ksystemsettings-coroutines', ':ksystemsettings-lifecycle'
+package com.ivianuu.ksystemsettings
+
+/**
+ * Global config
+ */
+object KSystemSettingsPlugins

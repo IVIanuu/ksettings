@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Manuel Wrage
+ * Copyright 2018 Manuel Wrage
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,45 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.ivianuu'
 
 android {
     compileSdkVersion Versions.compileSdk
+
     defaultConfig {
-        applicationId "com.ivianuu.ksystemsettings.sample"
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
-        versionCode Versions.versionCode
-        versionName Versions.versionName
     }
 }
 
 dependencies {
-    implementation Deps.androidxAppCompat
-    implementation project(':ksystemsettings')
-    implementation project(':ksystemsettings-coroutines')
-    implementation project(':ksystemsettings-lifecycle')
-    implementation project(':ksystemsettings-rx')
+    api Deps.kotlinStdLib
+}
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }

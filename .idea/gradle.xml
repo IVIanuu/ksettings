@@ -9,7 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/rxsystemsettings" />
+            <option value="$PROJECT_DIR$/ksystemsettings" />
+            <option value="$PROJECT_DIR$/ksystemsettings-coroutines" />
+            <option value="$PROJECT_DIR$/ksystemsettings-lifecycle" />
+            <option value="$PROJECT_DIR$/ksystemsettings-rx" />
             <option value="$PROJECT_DIR$/sample" />
           </set>
         </option>

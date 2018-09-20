@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RxSystemSettings.iml" filepath="$PROJECT_DIR$/RxSystemSettings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KSystemSettings.iml" filepath="$PROJECT_DIR$/KSystemSettings.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rxsystemsettings/rxsystemsettings.iml" filepath="$PROJECT_DIR$/rxsystemsettings/rxsystemsettings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ksystemsettings/ksystemsettings.iml" filepath="$PROJECT_DIR$/ksystemsettings/ksystemsettings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ksystemsettings-coroutines/ksystemsettings-coroutines.iml" filepath="$PROJECT_DIR$/ksystemsettings-coroutines/ksystemsettings-coroutines.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ksystemsettings-lifecycle/ksystemsettings-lifecycle.iml" filepath="$PROJECT_DIR$/ksystemsettings-lifecycle/ksystemsettings-lifecycle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ksystemsettings-rx/ksystemsettings-rx.iml" filepath="$PROJECT_DIR$/ksystemsettings-rx/ksystemsettings-rx.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>
