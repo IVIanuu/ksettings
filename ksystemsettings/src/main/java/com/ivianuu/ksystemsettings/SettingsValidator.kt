@@ -49,17 +49,14 @@ internal object SettingsValidator {
         }
     }
 
-    private fun doesGlobalSettingExists(name: String): Boolean {
-        return checkFieldValues(Settings.Global::class.java.declaredFields, name)
-    }
+    private fun doesGlobalSettingExists(name: String) =
+        checkFieldValues(Settings.Global::class.java.declaredFields, name)
 
-    private fun doesSecureSettingExists(name: String): Boolean {
-        return checkFieldValues(Settings.Secure::class.java.declaredFields, name)
-    }
+    private fun doesSecureSettingExists(name: String) =
+        checkFieldValues(Settings.Secure::class.java.declaredFields, name)
 
-    private fun doesSystemSettingExists(name: String): Boolean {
-        return checkFieldValues(Settings.System::class.java.declaredFields, name)
-    }
+    private fun doesSystemSettingExists(name: String) =
+        checkFieldValues(Settings.System::class.java.declaredFields, name)
 
     private fun checkFieldValues(fields: Array<Field>, value: String): Boolean {
         for (field in fields) {

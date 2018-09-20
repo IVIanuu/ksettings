@@ -137,13 +137,11 @@ internal object StringAdapter : RealSystemSetting.Adapter<String> {
         contentResolver: ContentResolver,
         type: SettingsType
     ): String {
-        val value: String? = when (type) {
+        return when (type) {
             SettingsType.GLOBAL -> Settings.Global.getString(contentResolver, name)
             SettingsType.SECURE -> Settings.Secure.getString(contentResolver, name)
             SettingsType.SYSTEM -> Settings.System.getString(contentResolver, name)
-        }
-
-        return value ?: defaultValue
+        } ?: defaultValue
     }
 
     override fun set(

@@ -44,7 +44,7 @@ internal class ContentObservers(private val contentResolver: ContentResolver) {
         }
     }
 
-    private class Observer() : ContentObserver(HANDLER) {
+    private class Observer : ContentObserver(HANDLER) {
         private val listeners = mutableSetOf<(() -> Unit)>()
 
         val isEmpty get() = listeners.isEmpty()
