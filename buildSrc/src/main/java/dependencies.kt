@@ -11,7 +11,7 @@ object Versions {
     const val androidGradlePlugin = "3.3.0-alpha10"
     const val androidx = "1.0.0-rc02"
     const val androidxArch = "2.0.0-rc01"
-    const val coroutines = "0.26.0-eap13"
+    const val coroutines = "0.26.1-eap13"
     const val kotlin = "1.3.0-rc-57"
     const val mavenGradle = "2.1"
     const val rxJava = "2.2.1"
