@@ -19,6 +19,7 @@ package com.ivianuu.ksystemsettings.lifecycle
 import androidx.lifecycle.GenericLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import com.ivianuu.ksystemsettings.ChangeListener
 import com.ivianuu.ksystemsettings.KSystemSettingsPlugins
 import com.ivianuu.ksystemsettings.SystemSetting
