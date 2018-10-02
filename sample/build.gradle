@@ -20,7 +20,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion Versions.compileSdk
     defaultConfig {
-        applicationId "com.ivianuu.ksystemsettings.sample"
+        applicationId "com.ivianuu.ksettings.sample"
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
         versionCode Versions.versionCode
@@ -30,8 +30,8 @@ android {
 
 dependencies {
     implementation Deps.androidxAppCompat
-    implementation project(':ksystemsettings')
-    implementation project(':ksystemsettings-coroutines')
-    implementation project(':ksystemsettings-lifecycle')
-    implementation project(':ksystemsettings-rx')
+    implementation project(':ksettings')
+    implementation project(':ksettings-coroutines')
+    implementation project(':ksettings-lifecycle')
+    implementation project(':ksettings-rx')
 }
