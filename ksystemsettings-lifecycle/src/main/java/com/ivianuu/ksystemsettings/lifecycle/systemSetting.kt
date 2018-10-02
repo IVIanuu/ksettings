@@ -19,8 +19,8 @@ package com.ivianuu.ksystemsettings.lifecycle
 import androidx.lifecycle.GenericLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import com.ivianuu.ksystemsettings.ChangeListener
+import com.ivianuu.ksystemsettings.KSystemSettingsPlugins
 import com.ivianuu.ksystemsettings.SystemSetting
 
 /**
@@ -28,7 +28,7 @@ import com.ivianuu.ksystemsettings.SystemSetting
  */
 fun <T> SystemSetting<T>.addListener(
     owner: LifecycleOwner,
-    removeEvent: Lifecycle.Event = androidx.lifecycle.Lifecycle.Event.ON_DESTROY,
+    removeEvent: Lifecycle.Event = KSystemSettingsPlugins.defaultRemoveEvent,
     listener: ChangeListener<T>
 ): ChangeListener<T> {
     removeEvent.checkValid()

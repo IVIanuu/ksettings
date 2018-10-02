@@ -48,7 +48,13 @@ interface SystemSetting<T> {
      */
     val type: SettingsType
 
+    /**
+     * Notifies the [listener] on changes of this setting
+     */
     fun addListener(listener: ChangeListener<T>)
 
+    /**
+     * Removes the previously added [listener]
+     */
     fun removeListener(listener: ChangeListener<T>)
 }
