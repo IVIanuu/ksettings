@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.ivianuu.ksettings.KSettings
+import com.ivianuu.ksettings.Setting
 import com.ivianuu.ksettings.lifecycle.liveData
 
 class MainActivity : AppCompatActivity() {
@@ -14,13 +15,13 @@ class MainActivity : AppCompatActivity() {
 
     private val autoRotation by lazy {
         systemSettings.int(
-            Settings.System.ACCELEROMETER_ROTATION, SettingsType.SYSTEM
+            Settings.System.ACCELEROMETER_ROTATION, Setting.Type.SYSTEM
         )
     }
 
     private val autoRotation2 by lazy {
         systemSettings.int(
-            Settings.System.ACCELEROMETER_ROTATION, SettingsType.SYSTEM
+            Settings.System.ACCELEROMETER_ROTATION, Setting.Type.SYSTEM
         )
     }
 

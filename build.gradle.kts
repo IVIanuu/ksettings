@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Manuel Wrage
+ * Copyright 2018 Manuel Wrage
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,4 +14,28 @@
  * limitations under the License.
  */
 
-include ':sample', ':ksettings', ':ksettings-rx', ':ksettings-coroutines', ':ksettings-lifecycle'
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
+    }
+    dependencies {
+        classpath(Deps.androidGradlePlugin)
+        classpath(Deps.kotlinGradlePlugin)
+        classpath(Deps.mavenGradlePlugin)
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
+        maven("https://jitpack.io")
+    }
+}
+
+task("clean", Delete::class) {
+    delete(rootProject.buildDir)
+}
