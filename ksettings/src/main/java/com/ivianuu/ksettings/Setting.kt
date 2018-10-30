@@ -24,11 +24,6 @@ import android.net.Uri
 interface Setting<T> {
 
     /**
-     * The current value of this setting
-     */
-    var value: T
-
-    /**
      * The name of this setting
      */
     val name: String
@@ -47,6 +42,16 @@ interface Setting<T> {
      * The type of this setting
      */
     val type: Type
+
+    /**
+     * Returns the current value of this [Setting]
+     */
+    fun get(): T
+
+    /**
+     * Sets the value of this setting to [value]
+     */
+    fun set(value: T)
 
     /**
      * Notifies the [listener] on changes of this setting

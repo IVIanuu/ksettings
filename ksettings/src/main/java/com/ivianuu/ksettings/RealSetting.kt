@@ -32,12 +32,6 @@ internal class RealSetting<T>(
     override val type: Setting.Type
 ) : Setting<T> {
 
-    override var value: T
-        get() = adapter.get(name, defaultValue, contentResolver, type)
-        set(value) {
-            adapter.set(name, value, contentResolver, type)
-        }
-
     override val uri: Uri by lazy {
         when (type) {
             Setting.Type.GLOBAL -> Settings.Global.getUriFor(name)
@@ -49,7 +43,7 @@ internal class RealSetting<T>(
     override val exists by lazy { SettingsValidator.doesExist(name) }
 
     private val contentListener = {
-        val value = value
+        val value = get()
         listeners.toList().forEach { it(value) }
     }
 
@@ -57,11 +51,17 @@ internal class RealSetting<T>(
 
     private var contentListenerAdded = false
 
+    override fun get() = adapter.get(name, defaultValue, contentResolver, type)
+
+    override fun set(value: T) {
+        adapter.set(name, value, contentResolver, type)
+    }
+
     override fun addListener(listener: ChangeListener<T>) {
         listeners.add(listener)
 
         // dispatch initial value
-        listener(value)
+        listener(get())
 
         // register content listener
         if (!contentListenerAdded) {
