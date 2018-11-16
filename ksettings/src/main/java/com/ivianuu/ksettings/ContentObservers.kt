@@ -45,7 +45,7 @@ internal class ContentObservers(private val contentResolver: ContentResolver) {
     }
 
     private class Observer : ContentObserver(HANDLER) {
-        private val listeners = mutableSetOf<(() -> Unit)>()
+        private val listeners = mutableListOf<(() -> Unit)>()
 
         val isEmpty get() = listeners.isEmpty()
 
@@ -55,7 +55,9 @@ internal class ContentObservers(private val contentResolver: ContentResolver) {
         }
 
         fun addListener(listener: () -> Unit) {
-            listeners.add(listener)
+            if (!listeners.contains(listener)) {
+                listeners.add(listener)
+            }
         }
 
         fun removeListener(listener: () -> Unit) {

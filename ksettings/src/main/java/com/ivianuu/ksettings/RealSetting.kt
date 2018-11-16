@@ -47,7 +47,7 @@ internal class RealSetting<T>(
         listeners.toList().forEach { it(value) }
     }
 
-    private val listeners = mutableSetOf<ChangeListener<T>>()
+    private val listeners = mutableListOf<ChangeListener<T>>()
 
     private var contentListenerAdded = false
 
@@ -57,7 +57,9 @@ internal class RealSetting<T>(
         adapter.set(name, value, contentResolver, type)
     }
 
-    override fun addListener(listener: ChangeListener<T>) {
+    override fun addListener(listener: ChangeListener<T>): ChangeListener<T> {
+        if (listeners.contains(listener)) return listener
+
         listeners.add(listener)
 
         // dispatch initial value
@@ -68,6 +70,8 @@ internal class RealSetting<T>(
             contentObservers.addListener(uri, contentListener)
             contentListenerAdded = true
         }
+
+        return listener
     }
 
     override fun removeListener(listener: ChangeListener<T>) {
