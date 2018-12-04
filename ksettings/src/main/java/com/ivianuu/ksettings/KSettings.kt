@@ -22,9 +22,7 @@ import android.content.Context
 /**
  * settings
  */
-class KSettings private constructor(private val contentResolver: ContentResolver) {
-
-    private val contentObservers = ContentObservers(contentResolver)
+interface KSettings {
 
     /**
      * Returns a new [FloatSetting]
@@ -32,13 +30,8 @@ class KSettings private constructor(private val contentResolver: ContentResolver
     fun float(
         name: String,
         type: Setting.Type,
-        defaultValue: Float = DEFAULT_FLOAT
-    ): FloatSetting =
-        RealSetting(
-            contentObservers,
-            contentResolver, name, defaultValue, FloatAdapter,
-            type
-        )
+        defaultValue: Float = RealKSettings.DEFAULT_FLOAT
+    ): FloatSetting
 
     /**
      * Returns a new [IntSetting]
@@ -46,12 +39,8 @@ class KSettings private constructor(private val contentResolver: ContentResolver
     fun int(
         name: String,
         type: Setting.Type,
-        defaultValue: Int = DEFAULT_INT
-    ): IntSetting =
-        RealSetting(
-            contentObservers,
-            contentResolver, name, defaultValue, IntAdapter, type
-        )
+        defaultValue: Int = RealKSettings.DEFAULT_INT
+    ): IntSetting
 
     /**
      * Returns a new [LongSetting]
@@ -59,12 +48,8 @@ class KSettings private constructor(private val contentResolver: ContentResolver
     fun long(
         name: String,
         type: Setting.Type,
-        defaultValue: Long = DEFAULT_LONG
-    ): LongSetting =
-        RealSetting(
-            contentObservers,
-            contentResolver, name, defaultValue, LongAdapter, type
-        )
+        defaultValue: Long = RealKSettings.DEFAULT_LONG
+    ): LongSetting
 
     /**
      * Returns a new [StringSetting]
@@ -72,33 +57,19 @@ class KSettings private constructor(private val contentResolver: ContentResolver
     fun string(
         name: String,
         type: Setting.Type,
-        defaultValue: String = DEFAULT_STRING
-    ): StringSetting =
-        RealSetting(
-            contentObservers,
-            contentResolver,
-            name,
-            defaultValue,
-            StringAdapter,
-            type
-        )
+        defaultValue: String = RealKSettings.DEFAULT_STRING
+    ): StringSetting
 
-    companion object {
-        private const val DEFAULT_FLOAT = 0f
-        private const val DEFAULT_INT = 0
-        private const val DEFAULT_LONG = 0L
-        private const val DEFAULT_STRING = ""
-
-        /**
-         * Returns a new [KSettings] instance which uses the [Context.getContentResolver]
-         */
-        operator fun invoke(context: Context) =
-            invoke(context.contentResolver)
-
-        /**
-         * Returns a new [KSettings] instance which uses the [contentResolver] internally
-         */
-        operator fun invoke(contentResolver: ContentResolver) =
-            KSettings(contentResolver)
-    }
 }
+
+/**
+ * Returns a new [KSettings] instance
+ */
+fun KSettings(contentResolver: ContentResolver): KSettings =
+        RealKSettings(contentResolver)
+
+/**
+ * Returns a new [KSettings] instance
+ */
+fun KSettings(context: Context) =
+        KSettings(context.contentResolver)
