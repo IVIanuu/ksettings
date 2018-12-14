@@ -46,6 +46,6 @@ dependencies {
     implementation(Deps.androidxAppCompat)
     implementation(project(":ksettings"))
     implementation(project(":ksettings-coroutines"))
-    implementation(project(":ksettings-lifecycle"))
+    implementation(project(":ksettings-livedata"))
     implementation(project(":ksettings-rx"))
 }

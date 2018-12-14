@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    api(Deps.archLifecycleExtensions)
+    api(Deps.androidxLifecycleLiveData)
     api(project(":ksettings"))
 }
 

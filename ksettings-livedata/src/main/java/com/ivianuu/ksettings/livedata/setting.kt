@@ -16,20 +16,32 @@
 
 package com.ivianuu.ksettings.lifecycle
 
+import androidx.lifecycle.GenericLifecycleObserver
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import com.ivianuu.ksettings.ChangeListener
 import com.ivianuu.ksettings.KSettingsPlugins
-
-private var _defaultRemoveEvent = Lifecycle.Event.ON_DESTROY
-    set(value) {
-        value.checkValid()
-        field = value
-    }
+import com.ivianuu.ksettings.Setting
 
 /**
- * The default remove event when addListener with a lifecycle owner is used
+ * Returns a [LiveData] which contains the latest value of [this]
  */
-var KSettingsPlugins.defaultRemoveEvent: Lifecycle.Event
-    get() = _defaultRemoveEvent
-    set(value) {
-        _defaultRemoveEvent = value
+val <T> Setting<T>.liveData: LiveData<T>
+    get() = SettingLiveData(this)
+
+private class SettingLiveData<T>(private val setting: Setting<T>) :
+    LiveData<T>() {
+
+    private val listener: ChangeListener<T> = { value = it }
+
+    override fun onActive() {
+        super.onActive()
+        setting.addListener(listener)
     }
+
+    override fun onInactive() {
+        super.onInactive()
+        setting.removeListener(listener)
+    }
+}
