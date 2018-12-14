@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         autoRotation2.liveData.observe(this, Observer {
-            Log.d("testtt", "changed 2 -> $it")
+            Log.d("testtt", "changed 2  -> $it")
         })
     }
 }
