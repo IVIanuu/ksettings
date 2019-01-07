@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ivianuu.ksettings.lifecycle
+package com.ivianuu.ksettings.livedata
 
 import androidx.lifecycle.GenericLifecycleObserver
 import androidx.lifecycle.Lifecycle

@@ -56,7 +56,7 @@ interface Setting<T> {
     /**
      * Notifies the [listener] on changes of this setting
      */
-    fun addListener(listener: ChangeListener<T>): ChangeListener<T>
+    fun addListener(listener: ChangeListener<T>)
 
     /**
      * Removes the previously added [listener]

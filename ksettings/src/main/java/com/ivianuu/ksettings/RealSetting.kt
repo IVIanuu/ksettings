@@ -40,7 +40,7 @@ internal class RealSetting<T>(
         }
     }
 
-    override val exists by lazy { SettingsValidator.doesExist(name) }
+    override val exists: Boolean by lazy { SettingsValidator.doesExist(name) }
 
     private val contentListener = {
         val value = get()
@@ -51,14 +51,14 @@ internal class RealSetting<T>(
 
     private var contentListenerAdded = false
 
-    override fun get() = adapter.get(name, defaultValue, contentResolver, type)
+    override fun get(): T = adapter.get(name, defaultValue, contentResolver, type)
 
     override fun set(value: T) {
         adapter.set(name, value, contentResolver, type)
     }
 
-    override fun addListener(listener: ChangeListener<T>): ChangeListener<T> {
-        if (listeners.contains(listener)) return listener
+    override fun addListener(listener: ChangeListener<T>) {
+        if (listeners.contains(listener)) return
 
         listeners.add(listener)
 
@@ -70,8 +70,6 @@ internal class RealSetting<T>(
             contentObservers.addListener(uri, contentListener)
             contentListenerAdded = true
         }
-
-        return listener
     }
 
     override fun removeListener(listener: ChangeListener<T>) {

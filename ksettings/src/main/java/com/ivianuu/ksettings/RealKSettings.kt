@@ -29,7 +29,7 @@ internal class RealKSettings(private val contentResolver: ContentResolver) : KSe
         name: String,
         type: Setting.Type,
         defaultValue: Float
-    ) =
+    ): Setting<Float> =
         RealSetting(
             contentObservers,
             contentResolver, name, defaultValue, FloatAdapter,
@@ -40,7 +40,7 @@ internal class RealKSettings(private val contentResolver: ContentResolver) : KSe
         name: String,
         type: Setting.Type,
         defaultValue: Int
-    ) =
+    ): Setting<Int> =
         RealSetting(
             contentObservers,
             contentResolver, name, defaultValue, IntAdapter, type
@@ -50,7 +50,7 @@ internal class RealKSettings(private val contentResolver: ContentResolver) : KSe
         name: String,
         type: Setting.Type,
         defaultValue: Long
-    ) =
+    ): Setting<Long> =
         RealSetting(
             contentObservers,
             contentResolver, name, defaultValue, LongAdapter, type
@@ -60,7 +60,7 @@ internal class RealKSettings(private val contentResolver: ContentResolver) : KSe
         name: String,
         type: Setting.Type,
         defaultValue: String
-    ) =
+    ): Setting<String> =
         RealSetting(
             contentObservers,
             contentResolver,
