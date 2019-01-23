@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.ivianuu.ksettings.KSettings
 import com.ivianuu.ksettings.Setting
-import com.ivianuu.ksettings.lifecycle.liveData
+import com.ivianuu.ksettings.livedata.liveData
 
 class MainActivity : AppCompatActivity() {
 

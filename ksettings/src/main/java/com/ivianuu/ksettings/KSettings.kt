@@ -30,7 +30,7 @@ interface KSettings {
     fun float(
         name: String,
         type: Setting.Type,
-        defaultValue: Float = RealKSettings.DEFAULT_FLOAT
+        defaultValue: Float = DEFAULT_FLOAT
     ): FloatSetting
 
     /**
@@ -39,7 +39,7 @@ interface KSettings {
     fun int(
         name: String,
         type: Setting.Type,
-        defaultValue: Int = RealKSettings.DEFAULT_INT
+        defaultValue: Int = DEFAULT_INT
     ): IntSetting
 
     /**
@@ -48,7 +48,7 @@ interface KSettings {
     fun long(
         name: String,
         type: Setting.Type,
-        defaultValue: Long = RealKSettings.DEFAULT_LONG
+        defaultValue: Long = DEFAULT_LONG
     ): LongSetting
 
     /**
@@ -57,7 +57,7 @@ interface KSettings {
     fun string(
         name: String,
         type: Setting.Type,
-        defaultValue: String = RealKSettings.DEFAULT_STRING
+        defaultValue: String = DEFAULT_STRING
     ): StringSetting
 
 }
@@ -71,5 +71,4 @@ fun KSettings(contentResolver: ContentResolver): KSettings =
 /**
  * Returns a new [KSettings] instance
  */
-fun KSettings(context: Context) =
-        KSettings(context.contentResolver)
+fun KSettings(context: Context): KSettings = KSettings(context.contentResolver)
