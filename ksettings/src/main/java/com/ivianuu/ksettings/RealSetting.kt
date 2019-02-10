@@ -51,10 +51,18 @@ internal class RealSetting<T>(
 
     private var contentListenerAdded = false
 
-    override fun get(): T = adapter.get(name, defaultValue, contentResolver, type)
+    override fun get(): T = try {
+        adapter.get(name, defaultValue, contentResolver, type)
+    } catch (e: Exception) {
+        throw RuntimeException("couldn't read value for name: $name", e)
+    }
 
     override fun set(value: T) {
-        adapter.set(name, value, contentResolver, type)
+        try {
+            adapter.set(name, value, contentResolver, type)
+        } catch (e: Exception) {
+            throw RuntimeException("couldn't write value for name: $name", e)
+        }
     }
 
     override fun addListener(listener: ChangeListener<T>) {

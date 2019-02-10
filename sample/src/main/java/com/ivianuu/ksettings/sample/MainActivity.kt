@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        autoRotation.liveData.observe(this, Observer {
+        autoRotation.liveData().observe(this, Observer {
             Log.d("testtt", "changed 1 -> $it")
         })
 
-        autoRotation2.liveData.observe(this, Observer {
+        autoRotation2.liveData().observe(this, Observer {
             Log.d("testtt", "changed 2  -> $it")
         })
     }

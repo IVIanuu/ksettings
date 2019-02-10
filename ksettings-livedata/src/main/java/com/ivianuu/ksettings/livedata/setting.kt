@@ -16,19 +16,14 @@
 
 package com.ivianuu.ksettings.livedata
 
-import androidx.lifecycle.GenericLifecycleObserver
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.ivianuu.ksettings.ChangeListener
-import com.ivianuu.ksettings.KSettingsPlugins
 import com.ivianuu.ksettings.Setting
 
 /**
  * Returns a [LiveData] which contains the latest value of [this]
  */
-val <T> Setting<T>.liveData: LiveData<T>
-    get() = SettingLiveData(this)
+fun <T> Setting<T>.liveData(): LiveData<T> = SettingLiveData(this)
 
 private class SettingLiveData<T>(private val setting: Setting<T>) :
     LiveData<T>() {

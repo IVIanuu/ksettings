@@ -14,7 +14,7 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.ksettings"
     const val vcsUrl = "https://github.com/IVIanuu/ksettings"
-    const val version = "${Build.versionName}-dev-1"
+    const val version = "${Build.versionName}-dev-2"
 }
 
 object Versions {

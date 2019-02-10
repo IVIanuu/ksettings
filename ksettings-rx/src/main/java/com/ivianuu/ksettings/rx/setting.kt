@@ -24,8 +24,7 @@ import io.reactivex.ObservableOnSubscribe
 /**
  * Returns a [Observable] which emits on changes of [this]
  */
-val <T> Setting<T>.observable: Observable<T>
-    get() = Observable.create(SettingObservable(this))
+fun <T> Setting<T>.observable(): Observable<T> = Observable.create(SettingObservable(this))
 
 private class SettingObservable<T>(private val setting: Setting<T>) :
     ObservableOnSubscribe<T> {
