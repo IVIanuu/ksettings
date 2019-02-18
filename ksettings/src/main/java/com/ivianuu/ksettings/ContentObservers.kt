@@ -20,12 +20,15 @@ import android.content.ContentResolver
 import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.withLock
 
 internal class ContentObservers(private val contentResolver: ContentResolver) {
 
     private val observers = mutableMapOf<Uri, Observer>()
+    private val lock = ReentrantLock()
 
-    fun addListener(uri: Uri, listener: () -> Unit) {
+    fun addListener(uri: Uri, listener: () -> Unit): Unit = lock.withLock {
         observers.getOrPut(uri) {
             Observer().also {
                 it.addListener(listener)
@@ -34,8 +37,8 @@ internal class ContentObservers(private val contentResolver: ContentResolver) {
         }
     }
 
-    fun removeListener(uri: Uri, listener: () -> Unit) {
-        val observer = observers[uri] ?: return
+    fun removeListener(uri: Uri, listener: () -> Unit): Unit = lock.withLock {
+        val observer = observers[uri] ?: return@withLock
         observer.removeListener(listener)
 
         // remove observers without listeners

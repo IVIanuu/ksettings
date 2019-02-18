@@ -19,6 +19,8 @@ package com.ivianuu.ksettings
 import android.content.ContentResolver
 import android.net.Uri
 import android.provider.Settings
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.withLock
 
 /**
  * Implementation of an [Setting]
@@ -48,8 +50,8 @@ internal class RealSetting<T>(
     }
 
     private val listeners = mutableListOf<ChangeListener<T>>()
-
     private var contentListenerAdded = false
+    private val listeningLock = ReentrantLock()
 
     override fun get(): T = try {
         adapter.get(name, defaultValue, contentResolver, type)
@@ -65,8 +67,8 @@ internal class RealSetting<T>(
         }
     }
 
-    override fun addListener(listener: ChangeListener<T>) {
-        if (listeners.contains(listener)) return
+    override fun addListener(listener: ChangeListener<T>): Unit = listeningLock.withLock {
+        if (listeners.contains(listener)) return@withLock
 
         listeners.add(listener)
 
@@ -80,7 +82,7 @@ internal class RealSetting<T>(
         }
     }
 
-    override fun removeListener(listener: ChangeListener<T>) {
+    override fun removeListener(listener: ChangeListener<T>): Unit = listeningLock.withLock {
         listeners.remove(listener)
 
         // unregister content listener
