@@ -1,5 +1,3 @@
-import org.gradle.jvm.tasks.Jar
-
 /*
  * Copyright 2018 Manuel Wrage
  *
@@ -25,5 +23,6 @@ apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/an
 apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/mvn-publish.gradle")
 
 dependencies {
+    api(Deps.closeable)
     api(Deps.kotlinStdLib)
 }

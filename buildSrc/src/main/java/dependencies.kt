@@ -14,7 +14,7 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.ksettings"
     const val vcsUrl = "https://github.com/IVIanuu/ksettings"
-    const val version = "${Build.versionName}-dev-3"
+    const val version = "${Build.versionName}-dev-4"
 }
 
 object Versions {
@@ -22,6 +22,7 @@ object Versions {
     const val androidxAppCompat = "1.0.2"
     const val androidxLifecycle = "2.0.0"
     const val bintray = "1.8.4"
+    const val closeable = "0.0.1-dev-2"
     const val coroutines = "1.0.0"
     const val kotlin = "1.3.21"
     const val mavenGradle = "2.1"
@@ -38,6 +39,8 @@ object Deps {
 
     const val bintrayGradlePlugin =
         "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintray}"
+
+    const val closeable = "com.ivianuu.closeable:closeable:${Versions.closeable}"
 
     const val coroutinesCore =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"

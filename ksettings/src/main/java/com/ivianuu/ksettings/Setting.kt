@@ -17,6 +17,7 @@
 package com.ivianuu.ksettings
 
 import android.net.Uri
+import com.ivianuu.closeable.Closeable
 
 /**
  * Setting
@@ -56,7 +57,7 @@ interface Setting<T> {
     /**
      * Notifies the [listener] on changes of this setting
      */
-    fun addListener(listener: ChangeListener<T>)
+    fun addListener(listener: ChangeListener<T>): Closeable
 
     /**
      * Removes the previously added [listener]
