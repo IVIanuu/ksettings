@@ -19,18 +19,19 @@ package com.ivianuu.ksettings.coroutines
 import com.ivianuu.ksettings.ChangeListener
 import com.ivianuu.ksettings.Setting
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowViaChannel
 
 /**
- * Returns a [ReceiveChannel] which emits on changes
+ * Returns a [Flow] which emits on changes
  */
-@ExperimentalCoroutinesApi
-fun <T> Setting<T>.receiveChannel(): ReceiveChannel<T> {
-// todo improve this there must be a better way than using a conflated broadcast channel
-    val channel = ConflatedBroadcastChannel<T>()
+@FlowPreview
+fun <T> Setting<T>.asFlow(): Flow<T> = flowViaChannel { channel ->
     val listener: ChangeListener<T> = { channel.offer(it) }
-    channel.invokeOnClose { removeListener(listener) }
     addListener(listener)
-    return channel.openSubscription()
+    //todo Remove when invokeOnClose is no longer experimental, or use replacement.
+    channel.invokeOnClose { removeListener(listener) }
 }

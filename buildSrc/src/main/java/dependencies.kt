@@ -14,17 +14,17 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.ksettings"
     const val vcsUrl = "https://github.com/IVIanuu/ksettings"
-    const val version = "${Build.versionName}-dev-5"
+    const val version = "${Build.versionName}-dev-6"
 }
 
 object Versions {
-    const val androidGradlePlugin = "3.3.0"
+    const val androidGradlePlugin = "3.4.0"
     const val androidxAppCompat = "1.1.0-alpha04"
     const val androidxLifecycle = "2.1.0-alpha04"
     const val bintray = "1.8.4"
-    const val closeable = "0.0.1-dev-4"
+    const val closeable = "0.0.1-dev-2"
     const val coroutines = "1.2.0"
-    const val kotlin = "1.3.30"
+    const val kotlin = "1.3.31"
     const val mavenGradle = "2.1"
     const val rxJava = "2.2.8"
 }

@@ -23,20 +23,16 @@ import com.ivianuu.ksettings.Setting
 /**
  * Returns a [LiveData] which contains the latest value of [this]
  */
-fun <T> Setting<T>.liveData(): LiveData<T> = SettingLiveData(this)
-
-private class SettingLiveData<T>(private val setting: Setting<T>) :
-    LiveData<T>() {
-
+fun <T> Setting<T>.asLiveData(): LiveData<T> = object : LiveData<T>() {
     private val listener: ChangeListener<T> = { value = it }
 
     override fun onActive() {
         super.onActive()
-        setting.addListener(listener)
+        addListener(listener)
     }
 
     override fun onInactive() {
         super.onInactive()
-        setting.removeListener(listener)
+        removeListener(listener)
     }
 }

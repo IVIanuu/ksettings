@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.ivianuu.ksettings.KSettings
 import com.ivianuu.ksettings.Setting
-import com.ivianuu.ksettings.livedata.liveData
+import com.ivianuu.ksettings.livedata.asLiveData
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        autoRotation.liveData().observe(this, Observer {
+        autoRotation.asLiveData().observe(this, Observer {
             Log.d("testtt", "changed 1 -> $it")
         })
 
-        autoRotation2.liveData().observe(this, Observer {
+        autoRotation2.asLiveData().observe(this, Observer {
             Log.d("testtt", "changed 2  -> $it")
         })
     }

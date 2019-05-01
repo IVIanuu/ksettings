@@ -24,21 +24,16 @@ import io.reactivex.ObservableOnSubscribe
 /**
  * Returns a [Observable] which emits on changes of [this]
  */
-fun <T> Setting<T>.observable(): Observable<T> = Observable.create(SettingObservable(this))
-
-private class SettingObservable<T>(private val setting: Setting<T>) :
-    ObservableOnSubscribe<T> {
-    override fun subscribe(emitter: ObservableEmitter<T>) {
-        val listener: (T) -> Unit = {
-            if (!emitter.isDisposed) {
-                emitter.onNext(it)
-            }
-        }
-
-        emitter.setCancellable { setting.removeListener(listener) }
-
+fun <T> Setting<T>.asObservable(): Observable<T> = Observable.create { emitter ->
+    val listener: (T) -> Unit = {
         if (!emitter.isDisposed) {
-            setting.addListener(listener)
+            emitter.onNext(it)
         }
+    }
+
+    emitter.setCancellable { removeListener(listener) }
+
+    if (!emitter.isDisposed) {
+        addListener(listener)
     }
 }
