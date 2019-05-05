@@ -19,7 +19,6 @@ package com.ivianuu.ksettings
 import android.content.ContentResolver
 import android.net.Uri
 import android.provider.Settings
-import com.ivianuu.closeable.Closeable
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
@@ -68,19 +67,19 @@ internal class RealSetting<T>(
         }
     }
 
-    override fun addListener(listener: ChangeListener<T>): Closeable = listeningLock.withLock {
-        listeners.add(listener)
+    override fun addListener(listener: ChangeListener<T>) {
+        listeningLock.withLock {
+            listeners.add(listener)
 
-        // dispatch initial value
-        listener(get())
+            // dispatch initial value
+            listener(get())
 
-        // register content listener
-        if (!contentListenerAdded) {
-            contentObservers.addListener(uri, contentListener)
-            contentListenerAdded = true
+            // register content listener
+            if (!contentListenerAdded) {
+                contentObservers.addListener(uri, contentListener)
+                contentListenerAdded = true
+            }
         }
-
-        return@withLock Closeable { removeListener(listener) }
     }
 
     override fun removeListener(listener: ChangeListener<T>): Unit = listeningLock.withLock {
