@@ -66,7 +66,7 @@ interface KSettings {
  * Returns a new [KSettings] instance
  */
 fun KSettings(contentResolver: ContentResolver): KSettings =
-        RealKSettings(contentResolver)
+    RealKSettings(contentResolver)
 
 /**
  * Returns a new [KSettings] instance

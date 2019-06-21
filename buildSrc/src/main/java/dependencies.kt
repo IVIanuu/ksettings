@@ -23,7 +23,7 @@ object Versions {
     const val androidxLifecycle = "2.1.0-alpha04"
     const val bintray = "1.8.4"
     const val coroutines = "1.2.0"
-    const val kotlin = "1.3.31"
+    const val kotlin = "1.3.40"
     const val mavenGradle = "2.1"
     const val rxJava = "2.2.8"
 }
