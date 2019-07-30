@@ -1,5 +1,4 @@
 import org.gradle.jvm.tasks.Jar
-import java.io.File
 
 /*
  * Copyright 2018 Manuel Wrage
@@ -19,10 +18,11 @@ import java.io.File
 
 plugins {
     id("com.android.library")
-    id("kotlin-android")
+    kotlin("android")
 }
 
 apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/android-build-lib.gradle")
+apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/kt-source-sets-android.gradle")
 apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/mvn-publish.gradle")
 
 dependencies {

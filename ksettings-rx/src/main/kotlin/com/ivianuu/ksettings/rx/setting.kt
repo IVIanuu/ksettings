@@ -1,5 +1,3 @@
-import org.gradle.jvm.tasks.Jar
-
 /*
  * Copyright 2018 Manuel Wrage
  *
@@ -16,16 +14,24 @@ import org.gradle.jvm.tasks.Jar
  * limitations under the License.
  */
 
-plugins {
-    id("com.android.library")
-    kotlin("android")
-}
+package com.ivianuu.ksettings.rx
 
-apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/android-build-lib.gradle")
-apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/kt-source-sets-android.gradle")
-apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/mvn-publish.gradle")
+import com.ivianuu.ksettings.Setting
+import io.reactivex.Observable
 
-dependencies {
-    api(Deps.androidxLifecycleLiveData)
-    api(project(":ksettings"))
+/**
+ * Returns a [Observable] which emits on changes of [this]
+ */
+fun <T> Setting<T>.asObservable(): Observable<T> = Observable.create { emitter ->
+    val listener: (T) -> Unit = {
+        if (!emitter.isDisposed) {
+            emitter.onNext(it)
+        }
+    }
+
+    emitter.setCancellable { removeListener(listener) }
+
+    if (!emitter.isDisposed) {
+        addListener(listener)
+    }
 }

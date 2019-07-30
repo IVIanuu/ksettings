@@ -18,10 +18,11 @@ import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    kotlin("android")
 }
 
 apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/android-build-app.gradle")
+apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/kt-source-sets-android.gradle")
 // todo remove once fixed
 apply(from = "https://raw.githubusercontent.com/IVIanuu/gradle-scripts/master/coroutines-fix.gradle")
 

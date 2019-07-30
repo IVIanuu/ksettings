@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-package com.ivianuu.ksettings.rx
+package com.ivianuu.ksettings.coroutines
 
+import com.ivianuu.ksettings.ChangeListener
 import com.ivianuu.ksettings.Setting
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowViaChannel
 
 /**
- * Returns a [Observable] which emits on changes of [this]
+ * Returns a [Flow] which emits on changes
  */
-fun <T> Setting<T>.asObservable(): Observable<T> = Observable.create { emitter ->
-    val listener: (T) -> Unit = {
-        if (!emitter.isDisposed) {
-            emitter.onNext(it)
-        }
-    }
-
-    emitter.setCancellable { removeListener(listener) }
-
-    if (!emitter.isDisposed) {
-        addListener(listener)
-    }
+@FlowPreview
+fun <T> Setting<T>.asFlow(): Flow<T> = flowViaChannel { channel ->
+    val listener: ChangeListener<T> = { channel.offer(it) }
+    addListener(listener)
+    //todo Remove when invokeOnClose is no longer experimental, or use replacement.
+    channel.invokeOnClose { removeListener(listener) }
 }

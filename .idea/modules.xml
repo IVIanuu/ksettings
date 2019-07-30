@@ -5,10 +5,17 @@
       <module fileurl="file://$PROJECT_DIR$/KSettings.iml" filepath="$PROJECT_DIR$/KSettings.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/ksettings/ksettings.iml" filepath="$PROJECT_DIR$/ksettings/ksettings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/buildSrc/ksettings-buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/ksettings-buildSrc.iml" group="ksettings/buildSrc" />
       <module fileurl="file://$PROJECT_DIR$/ksettings-coroutines/ksettings-coroutines.iml" filepath="$PROJECT_DIR$/ksettings-coroutines/ksettings-coroutines.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ksettings/ksettings-ksettings.iml" filepath="$PROJECT_DIR$/ksettings/ksettings-ksettings.iml" group="ksettings/ksettings" />
+      <module fileurl="file://$PROJECT_DIR$/ksettings-coroutines/ksettings-ksettings-coroutines.iml" filepath="$PROJECT_DIR$/ksettings-coroutines/ksettings-ksettings-coroutines.iml" group="ksettings/ksettings-coroutines" />
+      <module fileurl="file://$PROJECT_DIR$/ksettings-livedata/ksettings-ksettings-livedata.iml" filepath="$PROJECT_DIR$/ksettings-livedata/ksettings-ksettings-livedata.iml" group="ksettings/ksettings-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/ksettings-rx/ksettings-ksettings-rx.iml" filepath="$PROJECT_DIR$/ksettings-rx/ksettings-ksettings-rx.iml" group="ksettings/ksettings-rx" />
       <module fileurl="file://$PROJECT_DIR$/ksettings-livedata/ksettings-livedata.iml" filepath="$PROJECT_DIR$/ksettings-livedata/ksettings-livedata.iml" />
       <module fileurl="file://$PROJECT_DIR$/ksettings-rx/ksettings-rx.iml" filepath="$PROJECT_DIR$/ksettings-rx/ksettings-rx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/ksettings-sample.iml" filepath="$PROJECT_DIR$/sample/ksettings-sample.iml" group="ksettings/sample" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/studio-projects-ksettings.iml" filepath="$PROJECT_DIR$/studio-projects-ksettings.iml" group="ksettings" />
     </modules>
   </component>
 </project>
