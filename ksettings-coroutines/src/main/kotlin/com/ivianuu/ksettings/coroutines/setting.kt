@@ -19,16 +19,16 @@ package com.ivianuu.ksettings.coroutines
 import com.ivianuu.ksettings.ChangeListener
 import com.ivianuu.ksettings.Setting
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowViaChannel
+import kotlinx.coroutines.flow.callbackFlow
 
 /**
  * Returns a [Flow] which emits on changes
  */
 @FlowPreview
-fun <T> Setting<T>.asFlow(): Flow<T> = flowViaChannel { channel ->
-    val listener: ChangeListener<T> = { channel.offer(it) }
+fun <T> Setting<T>.asFlow(): Flow<T> = callbackFlow {
+    val listener: ChangeListener<T> = { offer(it) }
     addListener(listener)
-    //todo Remove when invokeOnClose is no longer experimental, or use replacement.
-    channel.invokeOnClose { removeListener(listener) }
+    awaitClose { removeListener(listener) }
 }

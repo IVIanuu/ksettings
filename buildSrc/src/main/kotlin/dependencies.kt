@@ -14,7 +14,7 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.ksettings"
     const val vcsUrl = "https://github.com/IVIanuu/ksettings"
-    const val version = "${Build.versionName}-dev8"
+    const val version = "${Build.versionName}-dev9"
 }
 
 object Versions {
@@ -22,8 +22,8 @@ object Versions {
     const val androidxAppCompat = "1.1.0-alpha04"
     const val androidxLifecycle = "2.1.0-alpha04"
     const val bintray = "1.8.4"
-    const val coroutines = "1.2.0"
-    const val kotlin = "1.3.40"
+    const val coroutines = "1.3.0-RC"
+    const val kotlin = "1.3.41"
     const val mavenGradle = "2.1"
     const val rxJava = "2.2.8"
 }
