@@ -20,51 +20,52 @@ import android.content.ContentResolver
 import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
-import java.util.concurrent.locks.ReentrantLock
-import kotlin.concurrent.withLock
 
 internal class ContentObservers(private val contentResolver: ContentResolver) {
 
     private val observers = mutableMapOf<Uri, Observer>()
-    private val lock = ReentrantLock()
 
-    fun addListener(uri: Uri, listener: () -> Unit): Unit = lock.withLock {
-        observers.getOrPut(uri) {
-            Observer().also {
-                it.addListener(listener)
-                contentResolver.registerContentObserver(uri, false, it)
-            }
+    fun addListener(uri: Uri, listener: () -> Unit) {
+        val oldObserver = synchronized(observers) { observers[uri] }
+        if (oldObserver != null) {
+            oldObserver.addListener(listener)
+        } else {
+            val newObserver = Observer()
+            synchronized(observers) { observers[uri] = newObserver }
+            contentResolver.registerContentObserver(uri, false, newObserver)
+            newObserver.addListener(listener)
         }
     }
 
-    fun removeListener(uri: Uri, listener: () -> Unit): Unit = lock.withLock {
-        val observer = observers[uri] ?: return@withLock
+    fun removeListener(uri: Uri, listener: () -> Unit) {
+        val observer = synchronized(observers) { observers[uri] } ?: return
         observer.removeListener(listener)
 
         // remove observers without listeners
         if (observer.isEmpty) {
             contentResolver.unregisterContentObserver(observer)
+            synchronized(observers) { observers -= uri }
         }
     }
 
     private class Observer : ContentObserver(HANDLER) {
         private val listeners = mutableListOf<(() -> Unit)>()
 
-        val isEmpty get() = listeners.isEmpty()
+        val isEmpty get() = synchronized(listeners) { listeners.isEmpty() }
 
         override fun onChange(selfChange: Boolean) {
             super.onChange(selfChange)
-            listeners.toList().forEach { it() }
+            synchronized(listeners) { listeners }
+                .toList()
+                .forEach { it() }
         }
 
         fun addListener(listener: () -> Unit) {
-            if (!listeners.contains(listener)) {
-                listeners.add(listener)
-            }
+            listeners += listener
         }
 
         fun removeListener(listener: () -> Unit) {
-            listeners.remove(listener)
+            listeners -= listener
         }
     }
 

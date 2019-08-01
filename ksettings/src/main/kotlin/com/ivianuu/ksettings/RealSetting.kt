@@ -19,8 +19,7 @@ package com.ivianuu.ksettings
 import android.content.ContentResolver
 import android.net.Uri
 import android.provider.Settings
-import java.util.concurrent.locks.ReentrantLock
-import kotlin.concurrent.withLock
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Implementation of an [Setting]
@@ -46,12 +45,13 @@ internal class RealSetting<T>(
 
     private val contentListener = {
         val value = get()
-        listeners.toList().forEach { it(value) }
+        synchronized(listeners) { listeners }
+            .toList()
+            .forEach { it(value) }
     }
 
     private val listeners = mutableListOf<ChangeListener<T>>()
-    private var contentListenerAdded = false
-    private val listeningLock = ReentrantLock()
+    private val contentListenerAdded = AtomicBoolean(false)
 
     override fun get(): T = try {
         adapter.get(name, defaultValue, contentResolver, type)
@@ -68,27 +68,26 @@ internal class RealSetting<T>(
     }
 
     override fun addListener(listener: ChangeListener<T>) {
-        listeningLock.withLock {
-            listeners.add(listener)
+        synchronized(listeners) { listeners += listener }
 
-            // dispatch initial value
-            listener(get())
+        // dispatch initial value
+        listener(get())
 
-            // register content listener
-            if (!contentListenerAdded) {
-                contentObservers.addListener(uri, contentListener)
-                contentListenerAdded = true
-            }
+        // register content listener
+        if (!contentListenerAdded.getAndSet(true)) {
+            contentObservers.addListener(uri, contentListener)
         }
     }
 
-    override fun removeListener(listener: ChangeListener<T>): Unit = listeningLock.withLock {
-        listeners.remove(listener)
+    override fun removeListener(listener: ChangeListener<T>) {
+        val isEmpty = synchronized(this) {
+            listeners -= listener
+            listeners.isEmpty()
+        }
 
         // unregister content listener
-        if (listeners.isEmpty() && contentListenerAdded) {
+        if (isEmpty && contentListenerAdded.getAndSet(false)) {
             contentObservers.removeListener(uri, contentListener)
-            contentListenerAdded = false
         }
     }
 
