@@ -67,6 +67,6 @@ interface Setting<T> {
      * Types of settings
      */
     enum class Type {
-        GLOBAL, SECURE, SYSTEM
+        Global, Secure, System
     }
 }

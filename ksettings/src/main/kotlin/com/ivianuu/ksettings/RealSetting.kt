@@ -35,9 +35,9 @@ internal class RealSetting<T>(
 
     override val uri: Uri by lazy {
         when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.getUriFor(name)
-            Setting.Type.SECURE -> Settings.Secure.getUriFor(name)
-            Setting.Type.SYSTEM -> Settings.System.getUriFor(name)
+            Setting.Type.Global -> Settings.Global.getUriFor(name)
+            Setting.Type.Secure -> Settings.Secure.getUriFor(name)
+            Setting.Type.System -> Settings.System.getUriFor(name)
         }
     }
 

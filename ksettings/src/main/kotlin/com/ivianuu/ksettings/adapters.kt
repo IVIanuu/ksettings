@@ -28,15 +28,15 @@ internal object FloatAdapter : RealSetting.Adapter<Float> {
         type: Setting.Type
     ): Float =
         when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.getFloat(
+            Setting.Type.Global -> Settings.Global.getFloat(
                 contentResolver, name,
                 defaultValue
             )
-            Setting.Type.SECURE -> Settings.Secure.getFloat(
+            Setting.Type.Secure -> Settings.Secure.getFloat(
                 contentResolver, name,
                 defaultValue
             )
-            Setting.Type.SYSTEM -> Settings.System.getFloat(
+            Setting.Type.System -> Settings.System.getFloat(
                 contentResolver, name,
                 defaultValue
             )
@@ -49,9 +49,9 @@ internal object FloatAdapter : RealSetting.Adapter<Float> {
         type: Setting.Type
     ) {
         when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.putFloat(contentResolver, name, value)
-            Setting.Type.SECURE -> Settings.Secure.putFloat(contentResolver, name, value)
-            Setting.Type.SYSTEM -> Settings.System.putFloat(contentResolver, name, value)
+            Setting.Type.Global -> Settings.Global.putFloat(contentResolver, name, value)
+            Setting.Type.Secure -> Settings.Secure.putFloat(contentResolver, name, value)
+            Setting.Type.System -> Settings.System.putFloat(contentResolver, name, value)
         }
     }
 }
@@ -65,15 +65,15 @@ internal object IntAdapter : RealSetting.Adapter<Int> {
         type: Setting.Type
     ): Int =
         when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.getInt(
+            Setting.Type.Global -> Settings.Global.getInt(
                 contentResolver, name,
                 defaultValue
             )
-            Setting.Type.SECURE -> Settings.Secure.getInt(
+            Setting.Type.Secure -> Settings.Secure.getInt(
                 contentResolver, name,
                 defaultValue
             )
-            Setting.Type.SYSTEM -> Settings.System.getInt(
+            Setting.Type.System -> Settings.System.getInt(
                 contentResolver, name,
                 defaultValue
             )
@@ -86,9 +86,9 @@ internal object IntAdapter : RealSetting.Adapter<Int> {
         type: Setting.Type
     ) {
         when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.putInt(contentResolver, name, value)
-            Setting.Type.SECURE -> Settings.Secure.putInt(contentResolver, name, value)
-            Setting.Type.SYSTEM -> Settings.System.putInt(contentResolver, name, value)
+            Setting.Type.Global -> Settings.Global.putInt(contentResolver, name, value)
+            Setting.Type.Secure -> Settings.Secure.putInt(contentResolver, name, value)
+            Setting.Type.System -> Settings.System.putInt(contentResolver, name, value)
         }
     }
 }
@@ -101,15 +101,15 @@ internal object LongAdapter : RealSetting.Adapter<Long> {
         contentResolver: ContentResolver,
         type: Setting.Type
     ): Long = when (type) {
-        Setting.Type.GLOBAL -> Settings.Global.getLong(
+        Setting.Type.Global -> Settings.Global.getLong(
             contentResolver, name,
             defaultValue
         )
-        Setting.Type.SECURE -> Settings.Secure.getLong(
+        Setting.Type.Secure -> Settings.Secure.getLong(
             contentResolver, name,
             defaultValue
         )
-        Setting.Type.SYSTEM -> Settings.System.getLong(
+        Setting.Type.System -> Settings.System.getLong(
             contentResolver, name,
             defaultValue
         )
@@ -122,9 +122,9 @@ internal object LongAdapter : RealSetting.Adapter<Long> {
         type: Setting.Type
     ) {
         when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.putLong(contentResolver, name, value)
-            Setting.Type.SECURE -> Settings.Secure.putLong(contentResolver, name, value)
-            Setting.Type.SYSTEM -> Settings.System.putLong(contentResolver, name, value)
+            Setting.Type.Global -> Settings.Global.putLong(contentResolver, name, value)
+            Setting.Type.Secure -> Settings.Secure.putLong(contentResolver, name, value)
+            Setting.Type.System -> Settings.System.putLong(contentResolver, name, value)
         }
     }
 }
@@ -138,9 +138,9 @@ internal object StringAdapter : RealSetting.Adapter<String> {
         type: Setting.Type
     ): String {
         return when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.getString(contentResolver, name)
-            Setting.Type.SECURE -> Settings.Secure.getString(contentResolver, name)
-            Setting.Type.SYSTEM -> Settings.System.getString(contentResolver, name)
+            Setting.Type.Global -> Settings.Global.getString(contentResolver, name)
+            Setting.Type.Secure -> Settings.Secure.getString(contentResolver, name)
+            Setting.Type.System -> Settings.System.getString(contentResolver, name)
         } ?: defaultValue
     }
 
@@ -151,9 +151,9 @@ internal object StringAdapter : RealSetting.Adapter<String> {
         type: Setting.Type
     ) {
         when (type) {
-            Setting.Type.GLOBAL -> Settings.Global.putString(contentResolver, name, value)
-            Setting.Type.SECURE -> Settings.Secure.putString(contentResolver, name, value)
-            Setting.Type.SYSTEM -> Settings.System.putString(contentResolver, name, value)
+            Setting.Type.Global -> Settings.Global.putString(contentResolver, name, value)
+            Setting.Type.Secure -> Settings.Secure.putString(contentResolver, name, value)
+            Setting.Type.System -> Settings.System.putString(contentResolver, name, value)
         }
     }
 }

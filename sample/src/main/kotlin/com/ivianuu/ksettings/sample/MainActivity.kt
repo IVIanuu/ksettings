@@ -15,13 +15,13 @@ class MainActivity : AppCompatActivity() {
 
     private val autoRotation by lazy {
         systemSettings.int(
-            Settings.System.ACCELEROMETER_ROTATION, Setting.Type.SYSTEM
+            Settings.System.ACCELEROMETER_ROTATION, Setting.Type.System
         )
     }
 
     private val autoRotation2 by lazy {
         systemSettings.int(
-            Settings.System.ACCELEROMETER_ROTATION, Setting.Type.SYSTEM
+            Settings.System.ACCELEROMETER_ROTATION, Setting.Type.System
         )
     }
 

@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.callbackFlow
 /**
  * Returns a [Flow] which emits on changes
  */
-@FlowPreview
 fun <T> Setting<T>.asFlow(): Flow<T> = callbackFlow {
     val listener: ChangeListener<T> = { offer(it) }
     addListener(listener)
