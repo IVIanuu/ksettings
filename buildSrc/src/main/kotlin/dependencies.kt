@@ -14,18 +14,18 @@ object Build {
 object Publishing {
     const val groupId = "com.ivianuu.ksettings"
     const val vcsUrl = "https://github.com/IVIanuu/ksettings"
-    const val version = "${Build.versionName}-dev11"
+    const val version = "${Build.versionName}-dev12"
 }
 
 object Versions {
-    const val androidGradlePlugin = "3.4.0"
-    const val androidxAppCompat = "1.1.0-alpha04"
-    const val androidxLifecycle = "2.1.0-alpha04"
+    const val androidGradlePlugin = "3.5.1"
+    const val androidxAppCompat = "1.1.0"
+    const val androidxLifecycle = "2.2.0-alpha05"
     const val bintray = "1.8.4"
-    const val coroutines = "1.3.0-RC"
-    const val kotlin = "1.3.41"
+    const val coroutines = "1.3.2"
+    const val kotlin = "1.3.50"
     const val mavenGradle = "2.1"
-    const val rxJava = "2.2.8"
+    const val rxJava = "2.2.10"
 }
 
 object Deps {
@@ -34,7 +34,7 @@ object Deps {
     const val androidxAppCompat = "androidx.appcompat:appcompat:${Versions.androidxAppCompat}"
 
     const val androidxLifecycleLiveData =
-        "androidx.lifecycle:lifecycle-livedata:${Versions.androidxLifecycle}"
+        "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.androidxLifecycle}"
 
     const val bintrayGradlePlugin =
         "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintray}"
